@@ -11,9 +11,7 @@ const branch =
 export default defineConfig({
   branch,
 
-  // Remove clientId and token for self-hosted mode
-  // clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // token: process.env.TINA_TOKEN,
+  // No clientId or token needed for local mode
 
   build: {
     outputFolder: "admin",

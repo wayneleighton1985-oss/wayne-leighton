@@ -1,14 +1,17 @@
 ---
-title: "Creative Problem Solving Techniques"
-author: "Wayne Leighton"
-description: "Unlock your creative potential with proven problem-solving methodologies. Learn design thinking, lateral thinking, and innovative approaches to tackle any challenge."
+title: Creative Problem Solving Techniques
+author: Wayne Leightons
+description: >
+  Unlock your creative potential with proven problem-solving methodologies.
+  Learn design thinking, lateral thinking, and innovative approaches to tackle
+  any challenge.
 priceDigital: 17.99
 pricePrint: 27.99
-coverImageUrl: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=400&h=600&fit=crop"
-category: "Personal Development"
+coverImageUrl: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=400&h=600&fit=crop'
+category: Personal Development
 publishedYear: 2022
 pages: 240
-isbn: "978-1234567892"
+isbn: 978-1234567892
 ---
 
 # Creative Problem Solving Techniques
@@ -17,20 +20,20 @@ Every challenge is an opportunity in disguise. This book equips you with a compr
 
 ## Methodologies Covered
 
-- **Design Thinking**: Human-centered approach to innovation
-- **Lateral Thinking**: Break free from conventional thought patterns
-- **SCAMPER Technique**: Systematic creative thinking method
-- **Mind Mapping**: Visual problem exploration and solution generation
-- **Six Thinking Hats**: Structured parallel thinking approach
+* **Design Thinking**: Human-centered approach to innovation
+* **Lateral Thinking**: Break free from conventional thought patterns
+* **SCAMPER Technique**: Systematic creative thinking method
+* **Mind Mapping**: Visual problem exploration and solution generation
+* **Six Thinking Hats**: Structured parallel thinking approach
 
 ## Real-World Applications
 
 Learn how these techniques apply across different contexts:
 
-- **Business Innovation**: Develop breakthrough products and services
-- **Team Collaboration**: Facilitate more creative group problem-solving
-- **Personal Challenges**: Apply creative thinking to life decisions
-- **Process Improvement**: Optimize workflows and systems
+* **Business Innovation**: Develop breakthrough products and services
+* **Team Collaboration**: Facilitate more creative group problem-solving
+* **Personal Challenges**: Apply creative thinking to life decisions
+* **Process Improvement**: Optimize workflows and systems
 
 ## Build Your Creative Confidence
 
