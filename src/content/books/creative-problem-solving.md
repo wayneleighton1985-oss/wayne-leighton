@@ -1,5 +1,5 @@
 ---
-title: Creative Problem Solving Techniques
+title: PASSION
 author: Wayne Leightons
 description: >
   Unlock your creative potential with proven problem-solving methodologies.
