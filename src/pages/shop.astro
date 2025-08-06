@@ -1,0 +1,188 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { books } from '../data/books';
+
+// Simple pagination (can be enhanced with URL params)
+const booksPerPage = 6;
+const totalBooks = books.length;
+const totalPages = Math.ceil(totalBooks / booksPerPage);
+---
+
+<MainLayout 
+  title="Shop All Books - Wayne Leighton Books" 
+  description="Browse our complete collection of transformative books on leadership, business, and personal development. Available in digital and print formats."
+>
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Shop All Books
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Discover Wayne Leighton's complete collection of transformative books. 
+          Each book is available in both digital and print formats.
+        </p>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="mb-8 max-w-md mx-auto">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Search books by title or author..." 
+            class="w-full px-4 py-3 pl-12 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          >
+          <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Books Grid -->
+      <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {books.map((book) => (
+          <div class="book-card bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group" data-title={book.title.toLowerCase()} data-author={book.author.toLowerCase()}>
+            <div class="aspect-[3/4] overflow-hidden">
+              <img 
+                src={book.coverImageUrl} 
+                alt={`${book.title} cover`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <div class="mb-2">
+                <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs px-2 py-1 rounded-full">
+                  {book.category}
+                </span>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                {book.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">
+                by {book.author} • {book.publishedYear}
+              </p>
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                {book.description}
+              </p>
+              
+              <!-- Pricing -->
+              <div class="mb-4">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-gray-500 dark:text-gray-400">Digital e-Book:</span>
+                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.priceDigital}</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-gray-500 dark:text-gray-400">Paperback:</span>
+                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.pricePrint}</span>
+                </div>
+              </div>
+
+              <!-- Book Details -->
+              {book.pages && (
+                <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                  {book.pages} pages
+                  {book.isbn && ` • ISBN: ${book.isbn}`}
+                </div>
+              )}
+
+              <!-- Action Button -->
+              <a 
+                href={`/books/${book.slug}`}
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center block"
+              >
+                View Details & Purchase
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- No Results Message -->
+      <div id="no-results" class="hidden text-center py-12">
+        <svg class="mx-auto w-16 h-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.562M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+        </svg>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No books found</h3>
+        <p class="text-gray-600 dark:text-gray-400">Try adjusting your search terms or browse all books.</p>
+        <button 
+          id="clear-search"
+          class="mt-4 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+        >
+          Clear search
+        </button>
+      </div>
+
+      <!-- Pagination (Simple version) -->
+      <div class="flex justify-center">
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          Showing all {totalBooks} books
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  // Search functionality
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const booksGrid = document.getElementById('books-grid') as HTMLElement;
+  const noResults = document.getElementById('no-results') as HTMLElement;
+  const clearSearchBtn = document.getElementById('clear-search') as HTMLElement;
+  const bookCards = document.querySelectorAll('.book-card') as NodeListOf<HTMLElement>;
+
+  function filterBooks() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    bookCards.forEach(card => {
+      const title = card.dataset.title || '';
+      const author = card.dataset.author || '';
+      
+      if (title.includes(searchTerm) || author.includes(searchTerm)) {
+        card.style.display = 'block';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Show/hide no results message
+    if (visibleCount === 0 && searchTerm !== '') {
+      noResults.classList.remove('hidden');
+      booksGrid.classList.add('hidden');
+    } else {
+      noResults.classList.add('hidden');
+      booksGrid.classList.remove('hidden');
+    }
+  }
+
+  function clearSearch() {
+    searchInput.value = '';
+    filterBooks();
+    searchInput.focus();
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', filterBooks);
+  clearSearchBtn.addEventListener('click', clearSearch);
+
+  // Handle search on Enter key
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      filterBooks();
+    }
+  });
+</script>

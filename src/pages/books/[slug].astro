@@ -1,0 +1,303 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getBookBySlug, books } from '../../data/books';
+
+export async function getStaticPaths() {
+  return books.map((book) => ({
+    params: { slug: book.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const book = getBookBySlug(slug!);
+
+if (!book) {
+  return Astro.redirect('/404');
+}
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": book.title,
+  "author": {
+    "@type": "Person",
+    "name": book.author
+  },
+  "description": book.description,
+  "image": book.coverImageUrl,
+  "isbn": book.isbn,
+  "numberOfPages": book.pages,
+  "datePublished": book.publishedYear.toString(),
+  "publisher": "Wayne Leighton Books",
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": book.priceDigital,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "format": "Digital"
+    },
+    {
+      "@type": "Offer", 
+      "price": book.pricePrint,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "format": "Paperback"
+    }
+  ]
+};
+---
+
+<MainLayout 
+  title={`${book.title} by ${book.author} - Wayne Leighton Books`}
+  description={book.description}
+  image={book.coverImageUrl}
+>
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  
+  <!-- Preload cover image -->
+  <link rel="preload" as="image" href={book.coverImageUrl} />
+
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <!-- Breadcrumb -->
+      <nav class="mb-8">
+        <ol class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+          <li><a href="/" class="hover:text-primary-600 dark:hover:text-primary-400">Home</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li><a href="/shop" class="hover:text-primary-600 dark:hover:text-primary-400">Shop</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li class="text-gray-900 dark:text-white">{book.title}</li>
+        </ol>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Book Cover -->
+        <div class="space-y-4">
+          <div class="aspect-[3/4] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+            <img 
+              src={book.coverImageUrl} 
+              alt={`${book.title} cover`}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          
+          <!-- Additional Info -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Book Details</h3>
+            <div class="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+              <div class="flex justify-between">
+                <span>Category:</span>
+                <span class="text-gray-900 dark:text-white">{book.category}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Published:</span>
+                <span class="text-gray-900 dark:text-white">{book.publishedYear}</span>
+              </div>
+              {book.pages && (
+                <div class="flex justify-between">
+                  <span>Pages:</span>
+                  <span class="text-gray-900 dark:text-white">{book.pages}</span>
+                </div>
+              )}
+              {book.isbn && (
+                <div class="flex justify-between">
+                  <span>ISBN:</span>
+                  <span class="text-gray-900 dark:text-white">{book.isbn}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Info & Purchase -->
+        <div class="space-y-6">
+          <div>
+            <div class="mb-2">
+              <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm px-3 py-1 rounded-full">
+                {book.category}
+              </span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              {book.title}
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
+              by {book.author}
+            </p>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">About This Book</h2>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              {book.description}
+            </p>
+          </div>
+
+          <!-- Format Selection & Purchase -->
+          <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Choose Your Format</h3>
+            
+            <!-- Format Options -->
+            <div class="space-y-3 mb-6">
+              <label class="flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <input 
+                  type="radio" 
+                  name="format" 
+                  value="digital" 
+                  class="format-radio text-primary-600 focus:ring-primary-500" 
+                  checked
+                />
+                <div class="ml-3 flex-1">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">Digital e-Book</div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">Instant download • PDF & EPUB formats</div>
+                    </div>
+                    <div class="text-lg font-semibold text-primary-600 dark:text-primary-400">
+                      ${book.priceDigital}
+                    </div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <input 
+                  type="radio" 
+                  name="format" 
+                  value="paperback" 
+                  class="format-radio text-primary-600 focus:ring-primary-500"
+                />
+                <div class="ml-3 flex-1">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">Paperback</div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">Physical book • Free shipping on orders over $25</div>
+                    </div>
+                    <div class="text-lg font-semibold text-primary-600 dark:text-primary-400">
+                      ${book.pricePrint}
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <!-- Purchase Button -->
+            <button 
+              id="add-to-cart-btn"
+              class="snipcart-add-item w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
+              data-item-id={book.id}
+              data-item-price={book.priceDigital}
+              data-item-url={`/books/${book.slug}`}
+              data-item-image={book.coverImageUrl}
+              data-item-name={`${book.title} (e-Book)`}
+              data-item-custom1-name="Format"
+              data-item-custom1-options="Digital|Paperback"
+              data-item-custom1-value="Digital"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"></path>
+              </svg>
+              <span id="button-text">Buy e-Book — ${book.priceDigital}</span>
+            </button>
+
+            <!-- Security & Guarantee -->
+            <div class="mt-4 flex items-center justify-center space-x-6 text-sm text-gray-600 dark:text-gray-400">
+              <div class="flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Secure checkout</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>30-day guarantee</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- What You'll Learn -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">What You'll Learn</h3>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Proven strategies and frameworks used by successful leaders</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Real-world case studies and practical examples</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Actionable steps you can implement immediately</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Tools and templates to accelerate your progress</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back to Shop -->
+      <div class="mt-12 text-center">
+        <a 
+          href="/shop" 
+          class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Shop
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script define:vars={{ book }}>
+  // Format selection and price update
+  const formatRadios = document.querySelectorAll('.format-radio');
+  const addToCartBtn = document.getElementById('add-to-cart-btn');
+  const buttonText = document.getElementById('button-text');
+
+  function updatePurchaseButton() {
+    const selectedFormat = document.querySelector('.format-radio:checked').value;
+    const isDigital = selectedFormat === 'digital';
+    
+    const price = isDigital ? book.priceDigital : book.pricePrint;
+    const formatName = isDigital ? 'e-Book' : 'Paperback';
+    
+    // Update button text
+    buttonText.textContent = `Buy ${formatName} — $${price}`;
+    
+    // Update Snipcart attributes
+    addToCartBtn.setAttribute('data-item-price', price.toString());
+    addToCartBtn.setAttribute('data-item-name', `${book.title} (${formatName})`);
+    addToCartBtn.setAttribute('data-item-custom1-value', isDigital ? 'Digital' : 'Paperback');
+  }
+
+  // Add event listeners to format radios
+  formatRadios.forEach(radio => {
+    radio.addEventListener('change', updatePurchaseButton);
+  });
+
+  // Initialize with default selection
+  updatePurchaseButton();
+</script>
