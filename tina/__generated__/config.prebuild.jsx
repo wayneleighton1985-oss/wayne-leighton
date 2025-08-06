@@ -3,10 +3,9 @@ import { defineConfig } from "tinacms";
 var branch = process.env.CF_PAGES_BRANCH || process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN,
+  // Remove clientId and token for self-hosted mode
+  // clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  // token: process.env.TINA_TOKEN,
   build: {
     outputFolder: "admin",
     publicFolder: "public"
