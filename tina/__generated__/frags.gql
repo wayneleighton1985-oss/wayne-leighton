@@ -1,0 +1,14 @@
+fragment BooksParts on Books {
+  __typename
+  title
+  author
+  description
+  priceDigital
+  pricePrint
+  coverImageUrl
+  category
+  publishedYear
+  pages
+  isbn
+  body
+}
