@@ -10,8 +10,9 @@ const branch =
 
 export default defineConfig({
   branch,
-
-  // No clientId or token needed for local mode
+  
+  // Explicitly enable local mode
+  isLocal: true,
 
   build: {
     outputFolder: "admin",

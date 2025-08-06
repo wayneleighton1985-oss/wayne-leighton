@@ -3,7 +3,8 @@ import { defineConfig } from "tinacms";
 var branch = process.env.CF_PAGES_BRANCH || process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
-  // No clientId or token needed for local mode
+  // Explicitly enable local mode
+  isLocal: true,
   build: {
     outputFolder: "admin",
     publicFolder: "public"
