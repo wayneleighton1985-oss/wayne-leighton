@@ -2,6 +2,8 @@ backend:
   name: github
   repo: nickroberts/Wayne-Leighton-Books
   branch: main
+  base_url: https://wayne-leighton.pages.dev
+  auth_endpoint: api/auth
 
 media_folder: "public/images/books"
 public_folder: "/images/books"
