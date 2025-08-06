@@ -1,3 +1,5 @@
+export const prerender = false;
+
 export async function GET({ url, request }: { url: URL; request: Request }) {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
