@@ -1,39 +1,37 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getBookBySlug, books } from '../../data/books';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
+  const books = await getCollection('books');
   return books.map((book) => ({
     params: { slug: book.slug },
+    props: { book },
   }));
 }
 
-const { slug } = Astro.params;
-const book = getBookBySlug(slug!);
-
-if (!book) {
-  return Astro.redirect('/404');
-}
+const { book } = Astro.props;
+const { Content } = await book.render();
 
 // Structured data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Book",
-  "name": book.title,
+  "name": book.data.title,
   "author": {
     "@type": "Person",
-    "name": book.author
+    "name": book.data.author
   },
-  "description": book.description,
-  "image": book.coverImageUrl,
-  "isbn": book.isbn,
-  "numberOfPages": book.pages,
-  "datePublished": book.publishedYear.toString(),
+  "description": book.data.description,
+  "image": book.data.coverImageUrl,
+  "isbn": book.data.isbn,
+  "numberOfPages": book.data.pages,
+  "datePublished": book.data.publishedYear.toString(),
   "publisher": "Wayne Leighton Books",
   "offers": [
     {
       "@type": "Offer",
-      "price": book.priceDigital,
+      "price": book.data.priceDigital,
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
@@ -41,7 +39,7 @@ const structuredData = {
     },
     {
       "@type": "Offer", 
-      "price": book.pricePrint,
+      "price": book.data.pricePrint,
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
@@ -52,15 +50,15 @@ const structuredData = {
 ---
 
 <MainLayout 
-  title={`${book.title} by ${book.author} - Wayne Leighton Books`}
-  description={book.description}
-  image={book.coverImageUrl}
+  title={`${book.data.title} by ${book.data.author} - Wayne Leighton Books`}
+  description={book.data.description}
+  image={book.data.coverImageUrl}
 >
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
   
   <!-- Preload cover image -->
-  <link rel="preload" as="image" href={book.coverImageUrl} />
+  <link rel="preload" as="image" href={book.data.coverImageUrl} />
 
   <section class="py-12">
     <div class="container mx-auto px-4">
@@ -71,7 +69,7 @@ const structuredData = {
           <li><span class="mx-2">/</span></li>
           <li><a href="/shop" class="hover:text-primary-600 dark:hover:text-primary-400">Shop</a></li>
           <li><span class="mx-2">/</span></li>
-          <li class="text-gray-900 dark:text-white">{book.title}</li>
+          <li class="text-gray-900 dark:text-white">{book.data.title}</li>
         </ol>
       </nav>
 
@@ -80,8 +78,8 @@ const structuredData = {
         <div class="space-y-4">
           <div class="aspect-[3/4] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
             <img 
-              src={book.coverImageUrl} 
-              alt={`${book.title} cover`}
+              src={book.data.coverImageUrl} 
+              alt={`${book.data.title} cover`}
               class="w-full h-full object-cover"
             />
           </div>
@@ -92,22 +90,22 @@ const structuredData = {
             <div class="space-y-1 text-sm text-gray-600 dark:text-gray-400">
               <div class="flex justify-between">
                 <span>Category:</span>
-                <span class="text-gray-900 dark:text-white">{book.category}</span>
+                <span class="text-gray-900 dark:text-white">{book.data.category}</span>
               </div>
               <div class="flex justify-between">
                 <span>Published:</span>
-                <span class="text-gray-900 dark:text-white">{book.publishedYear}</span>
+                <span class="text-gray-900 dark:text-white">{book.data.publishedYear}</span>
               </div>
-              {book.pages && (
+              {book.data.pages && (
                 <div class="flex justify-between">
                   <span>Pages:</span>
-                  <span class="text-gray-900 dark:text-white">{book.pages}</span>
+                  <span class="text-gray-900 dark:text-white">{book.data.pages}</span>
                 </div>
               )}
-              {book.isbn && (
+              {book.data.isbn && (
                 <div class="flex justify-between">
                   <span>ISBN:</span>
-                  <span class="text-gray-900 dark:text-white">{book.isbn}</span>
+                  <span class="text-gray-900 dark:text-white">{book.data.isbn}</span>
                 </div>
               )}
             </div>
@@ -119,23 +117,23 @@ const structuredData = {
           <div>
             <div class="mb-2">
               <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm px-3 py-1 rounded-full">
-                {book.category}
+                {book.data.category}
               </span>
             </div>
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-              {book.title}
+              {book.data.title}
             </h1>
             <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
-              by {book.author}
+              by {book.data.author}
             </p>
           </div>
 
           <!-- Description -->
           <div>
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">About This Book</h2>
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-              {book.description}
-            </p>
+            <div class="prose prose-gray dark:prose-invert max-w-none">
+              <Content />
+            </div>
           </div>
 
           <!-- Format Selection & Purchase -->
@@ -159,7 +157,7 @@ const structuredData = {
                       <div class="text-sm text-gray-600 dark:text-gray-400">Instant download • PDF & EPUB formats</div>
                     </div>
                     <div class="text-lg font-semibold text-primary-600 dark:text-primary-400">
-                      ${book.priceDigital}
+                      ${book.data.priceDigital}
                     </div>
                   </div>
                 </div>
@@ -179,7 +177,7 @@ const structuredData = {
                       <div class="text-sm text-gray-600 dark:text-gray-400">Physical book • Free shipping on orders over $25</div>
                     </div>
                     <div class="text-lg font-semibold text-primary-600 dark:text-primary-400">
-                      ${book.pricePrint}
+                      ${book.data.pricePrint}
                     </div>
                   </div>
                 </div>
@@ -190,82 +188,22 @@ const structuredData = {
             <button 
               id="add-to-cart-btn"
               class="snipcart-add-item w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
-              data-item-id={book.id}
-              data-item-price={book.priceDigital}
+              data-item-id={book.slug}
+              data-item-price={book.data.priceDigital}
               data-item-url={`/books/${book.slug}`}
-              data-item-image={book.coverImageUrl}
-              data-item-name={`${book.title} (e-Book)`}
+              data-item-image={book.data.coverImageUrl}
+              data-item-name={`${book.data.title} (e-Book)`}
               data-item-custom1-name="Format"
               data-item-custom1-options="Digital|Paperback"
               data-item-custom1-value="Digital"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0h15M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"></path>
               </svg>
-              <span id="button-text">Buy e-Book — ${book.priceDigital}</span>
+              <span id="cart-btn-text">Add to Cart</span>
             </button>
-
-            <!-- Security & Guarantee -->
-            <div class="mt-4 flex items-center justify-center space-x-6 text-sm text-gray-600 dark:text-gray-400">
-              <div class="flex items-center space-x-1">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>Secure checkout</span>
-              </div>
-              <div class="flex items-center space-x-1">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>30-day guarantee</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- What You'll Learn -->
-          <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">What You'll Learn</h3>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-              <li class="flex items-start space-x-2">
-                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>Proven strategies and frameworks used by successful leaders</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>Real-world case studies and practical examples</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>Actionable steps you can implement immediately</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>Tools and templates to accelerate your progress</span>
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
-
-      <!-- Back to Shop -->
-      <div class="mt-12 text-center">
-        <a 
-          href="/shop" 
-          class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
-        >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          Back to Shop
-        </a>
       </div>
     </div>
   </section>

@@ -1,6 +1,8 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { books } from '../data/books';
+import { getCollection } from 'astro:content';
+
+const books = await getCollection('books');
 
 // Simple pagination (can be enhanced with URL params)
 const booksPerPage = 6;
@@ -43,11 +45,11 @@ const totalPages = Math.ceil(totalBooks / booksPerPage);
       <!-- Books Grid -->
       <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {books.map((book) => (
-          <div class="book-card bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group" data-title={book.title.toLowerCase()} data-author={book.author.toLowerCase()}>
+          <div class="book-card bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group" data-title={book.data.title.toLowerCase()} data-author={book.data.author.toLowerCase()}>
             <div class="aspect-[3/4] overflow-hidden">
               <img 
-                src={book.coverImageUrl} 
-                alt={`${book.title} cover`}
+                src={book.data.coverImageUrl} 
+                alt={`${book.data.title} cover`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
@@ -55,36 +57,36 @@ const totalPages = Math.ceil(totalBooks / booksPerPage);
             <div class="p-6">
               <div class="mb-2">
                 <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs px-2 py-1 rounded-full">
-                  {book.category}
+                  {book.data.category}
                 </span>
               </div>
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {book.title}
+                {book.data.title}
               </h3>
               <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                by {book.author} • {book.publishedYear}
+                by {book.data.author} • {book.data.publishedYear}
               </p>
               <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                {book.description}
+                {book.data.description}
               </p>
               
               <!-- Pricing -->
               <div class="mb-4">
                 <div class="flex items-center justify-between text-sm">
                   <span class="text-gray-500 dark:text-gray-400">Digital e-Book:</span>
-                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.priceDigital}</span>
+                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.data.priceDigital}</span>
                 </div>
                 <div class="flex items-center justify-between text-sm">
                   <span class="text-gray-500 dark:text-gray-400">Paperback:</span>
-                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.pricePrint}</span>
+                  <span class="font-semibold text-primary-600 dark:text-primary-400">${book.data.pricePrint}</span>
                 </div>
               </div>
 
               <!-- Book Details -->
-              {book.pages && (
+              {book.data.pages && (
                 <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
-                  {book.pages} pages
-                  {book.isbn && ` • ISBN: ${book.isbn}`}
+                  {book.data.pages} pages
+                  {book.data.isbn && ` • ISBN: ${book.data.isbn}`}
                 </div>
               )}
 
