@@ -8,17 +8,26 @@ const featuredBooks = allBooks.slice(0, 4);
 
 <MainLayout title="Wayne Leighton Books - Lawful Fightback">
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-800 dark:to-gray-900 py-20">
+  <section class="bg-gradient-to-br from-gray-800 to-gray-900 py-20">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <!-- Logo prominently displayed -->
+        <div class="mb-8">
+          <img 
+            src="/logo.jpeg" 
+            alt="Wayne Leighton Logo - Scales of Justice with Raised Fist" 
+            class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full shadow-2xl border-4 border-primary-600"
+          />
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
           Transform Your
-          <span class="text-primary-600 dark:text-primary-400">Passion</span>
-          Fighting BAck
+          <span class="text-primary-400">Passion</span>
+          Fighting Back
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          Discover Wayne Leighton's collection of transformative books on his warfare, 
-          court trials and successes agaisnt the state.
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Discover Wayne Leighton's collection of transformative books on lawfare, 
+          court trials and successes against the state.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
@@ -32,7 +41,7 @@ const featuredBooks = allBooks.slice(0, 4);
           </a>
           <a 
             href="#featured" 
-            class="border-2 border-primary-600 text-primary-600 dark:text-primary-400 dark:border-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+            class="border-2 border-primary-400 text-primary-400 hover:bg-primary-400 hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
           >
             Browse Featured
           </a>
@@ -45,17 +54,17 @@ const featuredBooks = allBooks.slice(0, 4);
   <section id="featured" class="py-20">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
           Featured Books
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
           Explore Wayne Leighton's Most Popular Reads
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {featuredBooks.map((book) => (
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+          <div class="bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
             <div class="aspect-[3/4] overflow-hidden">
               <img 
                 src={book.data.coverImageUrl} 
@@ -65,19 +74,19 @@ const featuredBooks = allBooks.slice(0, 4);
               />
             </div>
             <div class="p-6">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+              <h3 class="text-lg font-semibold text-white mb-2 line-clamp-2">
                 {book.data.title}
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">
+              <p class="text-gray-300 text-sm mb-2">
                 by {book.data.author}
               </p>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+              <p class="text-gray-400 text-sm mb-4 line-clamp-3">
                 {book.data.description}
               </p>
               <div class="flex items-center justify-between">
                 <div class="text-sm">
-                  <span class="text-gray-500 dark:text-gray-400">{book.data.format}:</span>
-                  <span class="font-semibold text-primary-600 dark:text-primary-400 ml-1">£{book.data.price}</span>
+                  <span class="text-gray-400">{book.data.format}:</span>
+                  <span class="font-semibold text-primary-400 ml-1">£{book.data.price}</span>
                 </div>
                 <a 
                   href={`/books/${book.slug}`}
@@ -106,20 +115,20 @@ const featuredBooks = allBooks.slice(0, 4);
   </section>
 
   <!-- About Preview Section -->
-  <section class="bg-gray-50 dark:bg-gray-800 py-20">
+  <section class="bg-gray-800 py-20">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
           About Wayne Leighton
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        <p class="text-lg text-gray-300 mb-8">
           Wayne Leighton is a fearless author, speaker, and legal reform advocate whose groundbreaking work has challenged some of the most powerful institutions in the UK. With over 15 years of experience as a consultant and strategist, Wayne has helped countless individuals and organizations navigate complex systems and achieve meaningful change.
 
-His latest book—available in eBook, hard copy, and a rare Transcripts Edition—delivers more than just a memoir. It’s a powerful exposé of corruption, manipulation, and systemic deceit within the judiciary and government. The Transcripts Edition, a word-for-word account of real court proceedings, presents irrefutable proof of misconduct, covering everything from cross-examinations to judgment and exposing the flawed investigations and complaint coverups often hidden from public view.
+His latest book—available in eBook, hard copy, and a rare Transcripts Edition—delivers more than just a memoir. It's a powerful exposé of corruption, manipulation, and systemic deceit within the judiciary and government. The Transcripts Edition, a word-for-word account of real court proceedings, presents irrefutable proof of misconduct, covering everything from cross-examinations to judgment and exposing the flawed investigations and complaint coverups often hidden from public view.
 
-Wayne’s accompanying seminar goes beyond the book, offering a strategic masterclass in how to fight back against institutional abuse. Drawing on his personal victories in court—including cases against the Chief Constable of North Yorkshire Police, the Crown Prosecution Service, the DVLA, and the Independent Police Complaints Commission—he equips attendees with actionable tools to recognize and counter the deceptive tactics used by authorities.
+Wayne's accompanying seminar goes beyond the book, offering a strategic masterclass in how to fight back against institutional abuse. Drawing on his personal victories in court—including cases against the Chief Constable of North Yorkshire Police, the Crown Prosecution Service, the DVLA, and the Independent Police Complaints Commission—he equips attendees with actionable tools to recognize and counter the deceptive tactics used by authorities.
 
-Wayne Leighton is not just telling his story—he’s arming others with the knowledge and evidence to fight back. Whether through his writing or live seminars, his mission is clear: to expose the truth and empower people to take control of their own battles.
+Wayne Leighton is not just telling his story—he's arming others with the knowledge and evidence to fight back. Whether through his writing or live seminars, his mission is clear: to expose the truth and empower people to take control of their own battles.
         </p>
         <a 
           href="/about" 
@@ -138,17 +147,17 @@ Wayne Leighton is not just telling his story—he’s arming others with the kno
   <section class="py-20">
     <div class="container mx-auto px-4">
       <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-3xl font-bold text-white mb-4">
           Stay Connected
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        <p class="text-lg text-gray-300 mb-8">
           Get exclusive insights, early access to new books, and special offers delivered to your inbox.
         </p>
         <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
           <input 
             type="email" 
             placeholder="Enter your email address" 
-            class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            class="flex-1 px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             required
           >
           <button 
