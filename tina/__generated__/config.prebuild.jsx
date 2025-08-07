@@ -94,7 +94,7 @@ var config_default = defineConfig({
             type: "string",
             name: "isbn",
             label: "ISBN",
-            required: true
+            required: false
           },
           {
             type: "rich-text",

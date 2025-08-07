@@ -97,7 +97,7 @@ type Books implements Node & Document {
   category: String!
   publishedYear: Float!
   pages: Float!
-  isbn: String!
+  isbn: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
