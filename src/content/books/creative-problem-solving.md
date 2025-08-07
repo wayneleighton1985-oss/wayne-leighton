@@ -1,6 +1,6 @@
 ---
 title: PASSION
-author: Wayne Leightons
+author: Wayne Leighton
 description: >
   Unlock your creative potential with proven problem-solving methodologies.
   Learn design thinking, lateral thinking, and innovative approaches to tackle
