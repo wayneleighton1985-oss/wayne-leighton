@@ -6,7 +6,7 @@ const booksCollection = defineCollection({
     title: z.string(),
     author: z.string(),
     description: z.string(),
-    format: z.enum(['E-book', 'Print', 'Both']),
+    format: z.enum(['eBook', 'Hard copy', 'Transcripts Edition', 'Seminar ticket']),
     price: z.number(),
     coverImageUrl: z.string(),
     category: z.enum(['Lawfare']),

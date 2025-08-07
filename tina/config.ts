@@ -57,9 +57,10 @@ export default defineConfig({
             name: "format",
             label: "Format",
             options: [
-              "E-book",
-              "Print",
-              "Both"
+              "eBook",
+              "Hard copy",
+              "Transcripts Edition",
+              "Seminar ticket"
             ],
             required: true,
           },
@@ -80,10 +81,7 @@ export default defineConfig({
             name: "category",
             label: "Category",
             options: [
-              "Leadership",
-              "Business", 
-              "Marketing",
-              "Personal Development"
+              "Lawfare"
             ],
             required: true,
           },

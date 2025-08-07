@@ -1,5 +1,5 @@
 ---
-title: PASSION
+title: PASSION E book
 author: Wayne Leighton
 description: >
   A True Life Story About A Broken Child Living In A Residential Children's Home
@@ -8,7 +8,7 @@ description: >
 format: E-book
 price: 20
 coverImageUrl: /images/books/find-your-passion.jpeg
-category: Lawfare
+category: Personal Development
 publishedYear: 2022
 pages: 240
 isbn: 978-1234567892

@@ -5,8 +5,8 @@ description: >
   A True Life Story About A Broken Child Living In A Residential Children's Home
   Who Travels The World, Embarking On An Epic Journey That's Ambushed By
   Persecution, Resulting In A Voracious Fight Of Trials And Tribulations
-format: E-book
-price: 20
+format: Print
+price: 30
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2025
