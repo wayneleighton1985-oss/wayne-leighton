@@ -75,9 +75,9 @@ const featuredBooks = allBooks.slice(0, 4);
                 {book.data.description}
               </p>
               <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-500 dark:text-gray-400">
-                  <span class="block">Digital: ${book.data.priceDigital}</span>
-                  <span class="block">Print: ${book.data.pricePrint}</span>
+                <div class="text-sm">
+                  <span class="text-gray-500 dark:text-gray-400">{book.data.format}:</span>
+                  <span class="font-semibold text-primary-600 dark:text-primary-400 ml-1">£{book.data.price}</span>
                 </div>
                 <a 
                   href={`/books/${book.slug}`}
