@@ -2,8 +2,8 @@
 title: "Mindful Leadership: Leading with Purpose"
 author: "Wayne Leighton"
 description: "Discover how mindfulness can transform your leadership style. This book provides practical techniques for leading with clarity, compassion, and purpose in today's fast-paced business world."
-priceDigital: 24.99
-pricePrint: 34.99
+format: Both
+price: 28
 coverImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop"
 category: "Leadership"
 publishedYear: 2023

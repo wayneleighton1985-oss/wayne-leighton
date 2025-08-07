@@ -91,8 +91,8 @@ type Books implements Node & Document {
   title: String!
   author: String!
   description: JSON!
-  priceDigital: Float!
-  pricePrint: Float!
+  format: String!
+  price: Float!
   coverImageUrl: String!
   category: String!
   publishedYear: Float!
@@ -138,8 +138,8 @@ input BooksFilter {
   title: StringFilter
   author: StringFilter
   description: RichTextFilter
-  priceDigital: NumberFilter
-  pricePrint: NumberFilter
+  format: StringFilter
+  price: NumberFilter
   coverImageUrl: ImageFilter
   category: StringFilter
   publishedYear: NumberFilter
@@ -182,8 +182,8 @@ input BooksMutation {
   title: String
   author: String
   description: JSON
-  priceDigital: Float
-  pricePrint: Float
+  format: String
+  price: Float
   coverImageUrl: String
   category: String
   publishedYear: Float

@@ -2,8 +2,8 @@
 title: "Sustainable Business Practices"
 author: "Wayne Leighton"
 description: "A practical guide to implementing sustainable practices in your business. Learn how to reduce environmental impact while increasing profitability and stakeholder value."
-priceDigital: 22.99
-pricePrint: 32.99
+format: Print
+price: 24
 coverImageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=600&fit=crop"
 category: "Business"
 publishedYear: 2023

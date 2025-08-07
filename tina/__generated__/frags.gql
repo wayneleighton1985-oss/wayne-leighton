@@ -3,8 +3,8 @@ fragment BooksParts on Books {
   title
   author
   description
-  priceDigital
-  pricePrint
+  format
+  price
   coverImageUrl
   category
   publishedYear

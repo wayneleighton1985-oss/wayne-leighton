@@ -170,8 +170,8 @@ export type Books = Node & Document & {
   title: Scalars['String']['output'];
   author: Scalars['String']['output'];
   description: Scalars['JSON']['output'];
-  priceDigital: Scalars['Float']['output'];
-  pricePrint: Scalars['Float']['output'];
+  format: Scalars['String']['output'];
+  price: Scalars['Float']['output'];
   coverImageUrl: Scalars['String']['output'];
   category: Scalars['String']['output'];
   publishedYear: Scalars['Float']['output'];
@@ -217,8 +217,8 @@ export type BooksFilter = {
   title?: InputMaybe<StringFilter>;
   author?: InputMaybe<StringFilter>;
   description?: InputMaybe<RichTextFilter>;
-  priceDigital?: InputMaybe<NumberFilter>;
-  pricePrint?: InputMaybe<NumberFilter>;
+  format?: InputMaybe<StringFilter>;
+  price?: InputMaybe<NumberFilter>;
   coverImageUrl?: InputMaybe<ImageFilter>;
   category?: InputMaybe<StringFilter>;
   publishedYear?: InputMaybe<NumberFilter>;
@@ -309,8 +309,8 @@ export type BooksMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   author?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['JSON']['input']>;
-  priceDigital?: InputMaybe<Scalars['Float']['input']>;
-  pricePrint?: InputMaybe<Scalars['Float']['input']>;
+  format?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Float']['input']>;
   coverImageUrl?: InputMaybe<Scalars['String']['input']>;
   category?: InputMaybe<Scalars['String']['input']>;
   publishedYear?: InputMaybe<Scalars['Float']['input']>;
@@ -319,14 +319,14 @@ export type BooksMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, priceDigital: number, pricePrint: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null };
+export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null };
 
 export type BooksQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type BooksQuery = { __typename?: 'Query', books: { __typename: 'Books', id: string, title: string, author: string, description: any, priceDigital: number, pricePrint: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type BooksQuery = { __typename?: 'Query', books: { __typename: 'Books', id: string, title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type BooksConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -338,7 +338,7 @@ export type BooksConnectionQueryVariables = Exact<{
 }>;
 
 
-export type BooksConnectionQuery = { __typename?: 'Query', booksConnection: { __typename?: 'BooksConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BooksConnectionEdges', cursor: string, node?: { __typename: 'Books', id: string, title: string, author: string, description: any, priceDigital: number, pricePrint: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type BooksConnectionQuery = { __typename?: 'Query', booksConnection: { __typename?: 'BooksConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BooksConnectionEdges', cursor: string, node?: { __typename: 'Books', id: string, title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const BooksPartsFragmentDoc = gql`
     fragment BooksParts on Books {
@@ -346,8 +346,8 @@ export const BooksPartsFragmentDoc = gql`
   title
   author
   description
-  priceDigital
-  pricePrint
+  format
+  price
   coverImageUrl
   category
   publishedYear

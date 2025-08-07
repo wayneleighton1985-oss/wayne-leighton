@@ -44,15 +44,20 @@ var config_default = defineConfig({
             required: true
           },
           {
-            type: "number",
-            name: "priceDigital",
-            label: "Digital Price",
+            type: "string",
+            name: "format",
+            label: "Format",
+            options: [
+              "E-book",
+              "Print",
+              "Both"
+            ],
             required: true
           },
           {
             type: "number",
-            name: "pricePrint",
-            label: "Print Price",
+            name: "price",
+            label: "Price",
             required: true
           },
           {

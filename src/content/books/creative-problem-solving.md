@@ -2,12 +2,12 @@
 title: PASSION
 author: Wayne Leighton
 description: >
-  Unlock your creative potential with proven problem-solving methodologies.
-  Learn design thinking, lateral thinking, and innovative approaches to tackle
-  any challenge.
-priceDigital: 17.99
-pricePrint: 27.99
-coverImageUrl: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=400&h=600&fit=crop'
+  A True Life Story About A Broken Child Living In A Residential Children's Home
+  Who Travels The World, Embarking On An Epic Journey That's Ambushed By
+  Persecution, Resulting In A Voracious Fight Of Trials And Tribulations
+format: E-book
+price: 20
+coverImageUrl: /images/books/find-your-passion.jpeg
 category: Personal Development
 publishedYear: 2022
 pages: 240

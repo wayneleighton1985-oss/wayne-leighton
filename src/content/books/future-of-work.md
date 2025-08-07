@@ -2,8 +2,8 @@
 title: "The Future of Work: Adapting to Change"
 author: "Wayne Leighton"
 description: "Navigate the evolving workplace landscape with confidence. This book explores remote work, AI integration, and the skills needed to thrive in tomorrow's economy."
-priceDigital: 21.99
-pricePrint: 31.99
+format: Print
+price: 25
 coverImageUrl: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=600&fit=crop"
 category: "Business"
 publishedYear: 2023
