@@ -9,7 +9,7 @@ const booksCollection = defineCollection({
     format: z.enum(['E-book', 'Print', 'Both']),
     price: z.number(),
     coverImageUrl: z.string(),
-    category: z.enum(['Leadership', 'Business', 'Marketing', 'Personal Development']),
+    category: z.enum(['Lawfare']),
     publishedYear: z.number(),
     pages: z.number(),
     isbn: z.string().optional(),
