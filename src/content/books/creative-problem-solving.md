@@ -8,7 +8,7 @@ description: >
 format: E-book
 price: 20
 coverImageUrl: /images/books/find-your-passion.jpeg
-category: Personal Development
+category: Lawfare
 publishedYear: 2022
 pages: 240
 isbn: 978-1234567892
