@@ -10,6 +10,9 @@ publish = "dist"
 [build.environment]
 NODE_VERSION = "18"
 
+# Required for Cloudflare Pages
+pages_build_output_dir = "dist"
+
 # Environment variables needed for TinaCMS
 [vars]
 NEXT_PUBLIC_TINA_CLIENT_ID = "56844d01-3e31-4c3c-b165-956a1f1e0198"
