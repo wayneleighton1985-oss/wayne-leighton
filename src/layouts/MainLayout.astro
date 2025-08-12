@@ -5,7 +5,7 @@ export interface Props {
   image?: string;
 }
 
-const { title, description = "Wayne Leighton - Fearless author and legal reform advocate exposing corruption in the judiciary and government.", image = "/og-image.jpg" } = Astro.props;
+const { title, description = "Find Your Passion - Wayne Leighton's collection of transformative books on lawfare, court trials and successes against the state.", image = "/og-image.jpg" } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -151,13 +151,17 @@ const { title, description = "Wayne Leighton - Fearless author and legal reform 
         </div>
 
         <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Wayne Leighton Books. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Find Your Passion. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
     <!-- Snipcart -->
-    <div hidden id="snipcart" data-api-key="OTgwYzYwODgtMDYwMi00ZDUxLWE1NjctYzFkZDJiYzczMGUzNjM4OTAwNzYyOTQxMjEyNTY1" data-config-modal-style="side"></div>
+    <div hidden id="snipcart" 
+      data-api-key="OTgwYzYwODgtMDYwMi00ZDUxLWE1NjctYzFkZDJiYzczMGUzNjM4OTAwNzYyOTQxMjEyNTY1" 
+      data-config-modal-style="side"
+      data-config-domain="findyourpassion.co.uk">
+    </div>
     <script src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
 
     <!-- Scripts -->

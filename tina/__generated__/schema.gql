@@ -56,10 +56,13 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   books(relativePath: String): Books!
   booksConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BooksFilter): BooksConnection!
+  pages(relativePath: String): Pages!
+  pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
 }
 
 input DocumentFilter {
   books: BooksFilter
+  pages: PagesFilter
 }
 
 type DocumentConnectionEdges {
@@ -85,7 +88,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Books | Folder
+union DocumentNode = Books | Pages | Folder
 
 type Books implements Node & Document {
   title: String!
@@ -159,6 +162,32 @@ type BooksConnection implements Connection {
   edges: [BooksConnectionEdges]
 }
 
+type Pages implements Node & Document {
+  title: String!
+  description: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PagesFilter {
+  title: StringFilter
+  description: StringFilter
+  body: RichTextFilter
+}
+
+type PagesConnectionEdges {
+  cursor: String!
+  node: Pages
+}
+
+type PagesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PagesConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -167,15 +196,19 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateBooks(relativePath: String!, params: BooksMutation!): Books!
   createBooks(relativePath: String!, params: BooksMutation!): Books!
+  updatePages(relativePath: String!, params: PagesMutation!): Pages!
+  createPages(relativePath: String!, params: PagesMutation!): Pages!
 }
 
 input DocumentUpdateMutation {
   books: BooksMutation
+  pages: PagesMutation
   relativePath: String
 }
 
 input DocumentMutation {
   books: BooksMutation
+  pages: PagesMutation
 }
 
 input BooksMutation {
@@ -189,6 +222,12 @@ input BooksMutation {
   publishedYear: Float
   pages: Float
   isbn: String
+  body: JSON
+}
+
+input PagesMutation {
+  title: String
+  description: String
   body: JSON
 }
 

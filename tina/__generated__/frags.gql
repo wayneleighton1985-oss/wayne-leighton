@@ -12,3 +12,10 @@ fragment BooksParts on Books {
   isbn
   body
 }
+
+fragment PagesParts on Pages {
+  __typename
+  title
+  description
+  body
+}

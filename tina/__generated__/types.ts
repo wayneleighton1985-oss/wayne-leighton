@@ -84,6 +84,8 @@ export type Query = {
   document: DocumentNode;
   books: Books;
   booksConnection: BooksConnection;
+  pages: Pages;
+  pagesConnection: PagesConnection;
 };
 
 
@@ -122,8 +124,24 @@ export type QueryBooksConnectionArgs = {
   filter?: InputMaybe<BooksFilter>;
 };
 
+
+export type QueryPagesArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPagesConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+};
+
 export type DocumentFilter = {
   books?: InputMaybe<BooksFilter>;
+  pages?: InputMaybe<PagesFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -163,7 +181,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Books | Folder;
+export type DocumentNode = Books | Pages | Folder;
 
 export type Books = Node & Document & {
   __typename?: 'Books';
@@ -240,6 +258,35 @@ export type BooksConnection = Connection & {
   edges?: Maybe<Array<Maybe<BooksConnectionEdges>>>;
 };
 
+export type Pages = Node & Document & {
+  __typename?: 'Pages';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PagesFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type PagesConnectionEdges = {
+  __typename?: 'PagesConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pages>;
+};
+
+export type PagesConnection = Connection & {
+  __typename?: 'PagesConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PagesConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -249,6 +296,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateBooks: Books;
   createBooks: Books;
+  updatePages: Pages;
+  createPages: Pages;
 };
 
 
@@ -296,13 +345,27 @@ export type MutationCreateBooksArgs = {
   params: BooksMutation;
 };
 
+
+export type MutationUpdatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
+
+export type MutationCreatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
 export type DocumentUpdateMutation = {
   books?: InputMaybe<BooksMutation>;
+  pages?: InputMaybe<PagesMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   books?: InputMaybe<BooksMutation>;
+  pages?: InputMaybe<PagesMutation>;
 };
 
 export type BooksMutation = {
@@ -319,7 +382,15 @@ export type BooksMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type PagesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn?: string | null, body?: any | null };
+
+export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null };
 
 export type BooksQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -340,6 +411,25 @@ export type BooksConnectionQueryVariables = Exact<{
 
 export type BooksConnectionQuery = { __typename?: 'Query', booksConnection: { __typename?: 'BooksConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BooksConnectionEdges', cursor: string, node?: { __typename: 'Books', id: string, title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type PagesQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type PagesConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+}>;
+
+
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
 export const BooksPartsFragmentDoc = gql`
     fragment BooksParts on Books {
   __typename
@@ -353,6 +443,14 @@ export const BooksPartsFragmentDoc = gql`
   publishedYear
   pages
   isbn
+  body
+}
+    `;
+export const PagesPartsFragmentDoc = gql`
+    fragment PagesParts on Pages {
+  __typename
+  title
+  description
   body
 }
     `;
@@ -413,6 +511,63 @@ export const BooksConnectionDocument = gql`
   }
 }
     ${BooksPartsFragmentDoc}`;
+export const PagesDocument = gql`
+    query pages($relativePath: String!) {
+  pages(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PagesParts
+  }
+}
+    ${PagesPartsFragmentDoc}`;
+export const PagesConnectionDocument = gql`
+    query pagesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PagesFilter) {
+  pagesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PagesParts
+      }
+    }
+  }
+}
+    ${PagesPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -421,6 +576,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     booksConnection(variables?: BooksConnectionQueryVariables, options?: C): Promise<{data: BooksConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BooksConnectionQueryVariables, query: string}> {
         return requester<{data: BooksConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BooksConnectionQueryVariables, query: string}, BooksConnectionQueryVariables>(BooksConnectionDocument, variables, options);
+      },
+    pages(variables: PagesQueryVariables, options?: C): Promise<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}> {
+        return requester<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}, PagesQueryVariables>(PagesDocument, variables, options);
+      },
+    pagesConnection(variables?: PagesConnectionQueryVariables, options?: C): Promise<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}> {
+        return requester<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}, PagesConnectionQueryVariables>(PagesConnectionDocument, variables, options);
       }
     };
   }

@@ -11,8 +11,10 @@ const branch =
 export default defineConfig({
   branch,
   
-  // Explicitly enable local mode
-  isLocal: true,
+  // Use environment variable to determine mode, default to production
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
+  // The local flag is now set via the TINA_PUBLIC_IS_LOCAL env var
 
   build: {
     outputFolder: "admin",
@@ -107,6 +109,33 @@ export default defineConfig({
             type: "rich-text",
             name: "body",
             label: "Body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        name: "pages",
+        label: "Pages",
+        path: "src/content/pages",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Meta Description",
+            required: true,
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Page Content",
             isBody: true,
           },
         ],

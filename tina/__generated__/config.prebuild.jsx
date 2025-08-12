@@ -3,8 +3,10 @@ import { defineConfig } from "tinacms";
 var branch = process.env.CF_PAGES_BRANCH || process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
-  // Explicitly enable local mode
-  isLocal: true,
+  // Use environment variable to determine mode, default to production
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
+  // The local flag is now set via the TINA_PUBLIC_IS_LOCAL env var
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -98,6 +100,33 @@ var config_default = defineConfig({
             type: "rich-text",
             name: "body",
             label: "Body",
+            isBody: true
+          }
+        ]
+      },
+      {
+        name: "pages",
+        label: "Pages",
+        path: "src/content/pages",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Meta Description",
+            required: true
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Page Content",
             isBody: true
           }
         ]

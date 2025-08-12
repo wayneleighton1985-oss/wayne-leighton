@@ -1,16 +1,17 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const books = await getCollection('books');
-  return books.map((book) => ({
+  return books.map((book: CollectionEntry<'books'>) => ({
     params: { slug: book.slug },
     props: { book },
   }));
 }
 
-const { book } = Astro.props;
+const { book } = Astro.props as { book: CollectionEntry<'books'> };
 const { Content } = await book.render();
 
 // Structured data for SEO
@@ -47,7 +48,7 @@ const structuredData = {
   image={book.data.coverImageUrl}
 >
   <!-- Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
   
   <!-- Preload cover image -->
   <link rel="preload" as="image" href={book.data.coverImageUrl} />
@@ -138,9 +139,10 @@ const structuredData = {
               <div>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{book.data.format}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400">
-                  {book.data.format === 'E-book' ? 'Instant download • PDF & EPUB formats' : 
-                   book.data.format === 'Print' ? 'Physical book • Free shipping on orders over £25' :
-                   'Available in both digital and print formats'}
+                  {book.data.format === 'eBook' ? 'Instant download • PDF & EPUB formats' : 
+                   book.data.format === 'Hard copy' ? 'Physical book • Free shipping on orders over £25' :
+                   book.data.format === 'Transcripts Edition' ? 'Printed transcripts • Includes digital access' :
+                   'Seminar access • Includes digital materials'}
                 </p>
               </div>
               <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
@@ -153,8 +155,8 @@ const structuredData = {
               class="snipcart-add-item w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
               data-item-id={book.slug}
               data-item-price={book.data.price}
-              data-item-url={`/books/${book.slug}`}
-              data-item-image={book.data.coverImageUrl}
+              data-item-url={`https://findyourpassion.co.uk/books/${book.slug}`}
+              data-item-image={book.data.coverImageUrl.startsWith('http') ? book.data.coverImageUrl : `https://findyourpassion.co.uk${book.data.coverImageUrl}`}
               data-item-name={`${book.data.title} (${book.data.format})`}
               data-item-description={book.data.description}
             >

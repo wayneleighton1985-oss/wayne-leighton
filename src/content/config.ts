@@ -16,6 +16,15 @@ const booksCollection = defineCollection({
   }),
 });
 
+const pagesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 export const collections = {
   books: booksCollection,
+  pages: pagesCollection,
 };

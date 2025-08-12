@@ -1,18 +1,17 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 
 const books = await getCollection('books');
+const shopPage = await getEntry('pages', 'shop');
 
 // Simple pagination (can be enhanced with URL params)
-const booksPerPage = 6;
 const totalBooks = books.length;
-const totalPages = Math.ceil(totalBooks / booksPerPage);
 ---
 
 <MainLayout 
-  title="Shop All Books - Wayne Leighton Books" 
-  description="Browse our complete collection of transformative books on leadership, business, and personal development. Available in digital and print formats."
+  title={shopPage.data.title}
+  description={shopPage.data.description}
 >
   <section class="py-12">
     <div class="container mx-auto px-4">
@@ -22,8 +21,7 @@ const totalPages = Math.ceil(totalBooks / booksPerPage);
           Shop All Books
         </h1>
         <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Discover Wayne Leighton's complete collection of transformative books. 
-          Each book is available in both digital and print formats.
+          {shopPage.data.description}
         </p>
       </div>
 
