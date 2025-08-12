@@ -1,10 +1,11 @@
 # Wayne Leighton Books - E-commerce Website
 
-A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind CSS, and Snipcart for selling Wayne Leighton's collection of business and leadership books.
+A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind CSS, and Snipcart for selling Wayne Leighton's collection of business and leadership books. Content management is handled by TinaCMS.
 
 ## 🚀 Features
 
 - **Modern Tech Stack**: Built with Astro 4.0, TypeScript, and Tailwind CSS
+- **Content Management**: TinaCMS for easy content editing
 - **E-commerce Ready**: Integrated with Snipcart for secure payments and cart management
 - **Responsive Design**: Mobile-first design that works on all devices
 - **Dark Mode**: Toggle between light and dark themes with preference persistence
@@ -38,19 +39,78 @@ Each book is available in two formats:
    - Replace `YOUR_SNIPCART_PUBLIC_API_KEY_HERE` in `src/layouts/MainLayout.astro` with your actual Snipcart public API key
    - For testing, you can use Snipcart's test mode
 
-4. **Start the development server**
+4. **Configure TinaCMS**
+   - The local development environment is already configured with test credentials in `.env`
+   - For production, ensure the environment variables in `.env.production` are set correctly
+
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
-   Navigate to `http://localhost:4321` to see the website
+6. **Open your browser**
+   - Navigate to `http://localhost:4321` to see the website
+   - Navigate to `http://localhost:4001/admin` to access the TinaCMS admin interface
 
 ## 📝 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
+```bash
+# Development
+npm run dev         # Start development server
+
+# Production
+npm run build       # Build for production
+npm run preview     # Preview production build locally
+```
+
+## 🔧 TinaCMS Deployment on Cloudflare Pages
+
+For production deployment on Cloudflare Pages, TinaCMS requires specific environment variables to be set:
+
+```
+NEXT_PUBLIC_TINA_CLIENT_ID=your-client-id
+TINA_TOKEN=your-token
+TINA_PUBLIC_IS_LOCAL=false
+GITHUB_OWNER=CLAYYO
+GITHUB_REPO=wayne-leighton
+GITHUB_BRANCH=main
+GITHUB_PERSONAL_ACCESS_TOKEN=your-github-token
+```
+
+These variables are already configured in the `.env.production` file and the `cloudflare-pages.toml` configuration file.
+
+### Cloudflare Pages Deployment Steps
+
+1. Create a new Cloudflare Pages project connected to your GitHub repository
+2. Configure the build settings:
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+   - Node.js version: 18 (or latest LTS)
+3. Add the environment variables in the Cloudflare Pages project settings
+4. Deploy the site
+5. The TinaCMS admin interface will be available at `/admin/` on your Cloudflare Pages domain
+
+### GitHub Actions Deployment
+
+Alternatively, you can use the included GitHub Actions workflow to deploy to Cloudflare Pages:
+
+1. Set up the required secrets in your GitHub repository (see `GITHUB-SECRETS.md`)
+2. Push to the main branch or manually trigger the workflow
+3. The GitHub Action will build and deploy to Cloudflare Pages automatically
+
+## 📂 Content Management
+
+All content can be managed through the TinaCMS admin interface:
+
+- **Books**: Edit book details, descriptions, prices, and cover images
+- **Pages**: Edit content for Home, About, and Shop pages
+
+```
+
+## 🛠️ Other Scripts
+
+- `npm run astro check` - Check for TypeScript errors
+- `npm run tina check` - Check TinaCMS configuration
 - `npm run astro` - Run Astro CLI commands
 
 ## 🏗️ Project Structure
