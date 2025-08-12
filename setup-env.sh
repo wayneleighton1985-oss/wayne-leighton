@@ -9,7 +9,9 @@ if [ -f ".env.production" ]; then
   echo "Found .env.production file"
   
   # Export variables from .env.production
-  export $(grep -v '^#' .env.production | xargs)
+  set -a
+  source .env.production
+  set +a
   
   echo "Environment variables set:"
   echo "NEXT_PUBLIC_TINA_CLIENT_ID: $NEXT_PUBLIC_TINA_CLIENT_ID"
@@ -20,7 +22,7 @@ if [ -f ".env.production" ]; then
   echo "GITHUB_BRANCH: $GITHUB_BRANCH"
   echo "GITHUB_PERSONAL_ACCESS_TOKEN: [HIDDEN]"
   
-  echo "\nYou can now run 'npm run build' to build the project."
+  echo "You can now run 'npm run build' to build the project."
 else
   echo "Error: .env.production file not found."
   echo "Please create a .env.production file with the required environment variables."
