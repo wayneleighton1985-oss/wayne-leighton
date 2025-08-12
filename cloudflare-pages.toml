@@ -8,7 +8,7 @@
   NODE_VERSION = "18"
 
 # Environment variables needed for TinaCMS
-[env.production]
+[env.production.environment_variables]
   NEXT_PUBLIC_TINA_CLIENT_ID = "56844d01-3e31-4c3c-b165-956a1f1e0198"
   TINA_TOKEN = "7a0024bf17443a12d8bf5054e078bd42af60c5e0"
   TINA_PUBLIC_IS_LOCAL = "false"

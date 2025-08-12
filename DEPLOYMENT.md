@@ -45,28 +45,12 @@ GITHUB_PERSONAL_ACCESS_TOKEN=7a0024bf17443a12d8bf5054e078bd42af60c5e0
 
 ### Cloudflare Pages Configuration
 
-A `cloudflare-pages.toml` file has been created in the root of the project with the necessary configuration:
+Two configuration files have been created in the root of the project:
 
-```toml
-# Cloudflare Pages Configuration
+1. `cloudflare-pages.toml` - For Cloudflare Pages dashboard deployments
+2. `wrangler.toml` - For Wrangler CLI deployments
 
-[build]
-  command = "npm run build"
-  publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "18"
-
-# Environment variables needed for TinaCMS
-[env.production]
-  NEXT_PUBLIC_TINA_CLIENT_ID = "56844d01-3e31-4c3c-b165-956a1f1e0198"
-  TINA_TOKEN = "7a0024bf17443a12d8bf5054e078bd42af60c5e0"
-  TINA_PUBLIC_IS_LOCAL = "false"
-  GITHUB_OWNER = "CLAYYO"
-  GITHUB_REPO = "wayne-leighton"
-  GITHUB_BRANCH = "main"
-  GITHUB_PERSONAL_ACCESS_TOKEN = "7a0024bf17443a12d8bf5054e078bd42af60c5e0"
-```
+Both files contain the necessary environment variables for TinaCMS.
 
 ### Troubleshooting
 
