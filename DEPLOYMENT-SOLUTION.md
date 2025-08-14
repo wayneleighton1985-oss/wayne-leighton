@@ -45,9 +45,10 @@ pages_build_output_dir = "dist"
 
 We've implemented a cleaner solution for the NextAuth configuration to work properly with Astro's static build process:
 
-- Modified `[...nextauth].ts` to use environment-based conditional imports
-- In production (static build), the file exports simple 404 response handlers
-- In development, it dynamically imports NextAuth only when needed
+- Modified `[...nextauth].ts` to use a try-catch approach with dynamic imports
+- Removed conditional environment checks that were causing build errors
+- Added error handling to gracefully handle cases where NextAuth can't be loaded
+- Simplified the export syntax to be compatible with Astro's static build process
 
 Here's the updated implementation:
 
