@@ -37,67 +37,18 @@ EOL
 echo "Setting up API directory structure..."
 mkdir -p src/pages/api/auth
 
-# Check if auth file exists and fix it if needed
-echo "Checking auth configuration..."
-AUTH_FILE="src/pages/api/auth/[...nextauth].ts"
-if [ -f "$AUTH_FILE" ]; then
-  echo "Auth file exists, backing it up..."
-  # Create a backup of the original file
-  cp "$AUTH_FILE" "${AUTH_FILE}.bak"
-  
-  # Remove the NextAuth file completely
-  echo "Removing NextAuth file for build..."
-  rm "$AUTH_FILE"
-fi
+# No need to modify auth files since we've implemented environment-based conditional imports
+echo "Using environment-based conditional imports for auth..."
 
-# Create a stub file that will be used during build
-echo "Creating stub auth files for build..."
+# Clean the dist directory before building
+echo "Cleaning dist directory..."
+rm -rf dist
 
-# Create a stub for the [...nextauth].ts file
-cat > src/pages/api/auth/[...nextauth].ts << EOL
-// Stub file for auth during build
-export function GET() {
-  return new Response(JSON.stringify({ message: "Auth API stub" }), {
-    headers: { "content-type": "application/json" },
-  });
-}
+# Set PROD environment for build to ensure NextAuth is not imported
+export ASTRO_ENV="production"
 
-export function POST() {
-  return new Response(JSON.stringify({ message: "Auth API stub" }), {
-    headers: { "content-type": "application/json" },
-  });
-}
-EOL
-
-# Create a temporary directory for the build process
+# Create a temporary directory for the build process if needed
 mkdir -p temp_build
-
-# Move the entire src/pages/api directory to temp location
-if [ -d "src/pages/api" ]; then
-  echo "Moving API directory to temporary location..."
-  mv src/pages/api temp_build/api_backup
-  
-  # Create an empty api directory to prevent errors
-  mkdir -p src/pages/api
-  
-  # Create a simple index.ts file in the api directory
-  cat > src/pages/api/index.ts << EOL
-// Empty API endpoint
-export function GET() {
-  return new Response(JSON.stringify({ message: "API stub" }), {
-    headers: { "content-type": "application/json" },
-  });
-}
-EOL
-fi
-
-# Create a .astro version of the API stub to handle any direct imports during build
-mkdir -p src/pages/api/auth
-cat > src/pages/api/auth/_nextauth.astro << EOL
----
-// Empty API endpoint stub for Astro build
----
-<script>
   export function GET() {
     return new Response(JSON.stringify({ message: "API stub" }), {
       headers: { "content-type": "application/json" },
@@ -150,139 +101,27 @@ function NextAuth() {
     }
   };
 }
-
-export default NextAuth;
-export { NextAuth };
 EOL
 
-# Create providers directory and GitHub provider
-mkdir -p node_modules/next-auth/providers
-cat > node_modules/next-auth/providers/github.js << EOL
-// Mock GitHub provider
-export default function GitHub(options) {
-  return {
-    id: 'github',
-    name: 'GitHub',
-    type: 'oauth',
-    ...options
-  };
-}
+# Install dependencies
+echo "Installing dependencies..."
+npm ci
 
-export { GitHub };
-EOL
-
-cat > node_modules/next-auth/providers/index.js << EOL
-export { default as GitHub } from './github.js';
-EOL
-
-# Create JWT module
-mkdir -p node_modules/next-auth/jwt
-cat > node_modules/next-auth/jwt/index.js << EOL
-// Mock JWT module
-export function decode() {
-  return { token: {} };
-}
-
-export function encode() {
-  return "mock.jwt.token";
-}
-
-export function getToken() {
-  return { token: {} };
-}
-EOL
-
-# Create a package.json to specify module type
-cat > node_modules/next-auth/package.json << EOL
-{
-  "name": "next-auth",
-  "version": "4.24.5",
-  "type": "module",
-  "main": "index.js",
-  "module": "index.mjs",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    },
-    "./providers/*": "./providers/*",
-    "./jwt": "./jwt/index.js"
-  },
-  "sideEffects": false
-}
-EOL
-
-# Clean up any existing dist directory to ensure no leftover files
-if [ -d "dist" ]; then
-  echo "Removing existing dist directory..."
-  rm -rf dist
+# Run the build
+echo "Running build with environment-based conditional imports..."
+if npm run build; then
+  echo "Build successful!"
+else
+  echo "Build failed, check logs for details."
+  exit 1
 fi
 
-# Create a direct stub for the specific file that's causing the error
-echo "Creating direct stub for the problematic file..."
-mkdir -p dist/pages/api/auth
-cat > dist/pages/api/auth/_---nextauth_.astro.mjs << EOL
-// Direct stub for the problematic file
-export function GET() {
-  return new Response(JSON.stringify({ message: "API stub" }));
-}
+# Clean up temporary files
+echo "Cleaning up temporary files..."
+rm -rf temp_build
 
-export function POST() {
-  return new Response(JSON.stringify({ message: "API stub" }));
-}
-
-export default function NextAuth() {
-  return {
-    GET,
-    POST
-  };
-}
-EOL
-
-echo "API directory modified and next-auth module replaced with mock for build."
-
-echo "Auth configuration prepared for build."
-
-# Try to run the full build
-echo "Attempting full build with TinaCMS..."
-if npm run build; then
-  echo "Full build successful!"
-  
-    # Restore the API directory after successful build
-  if [ -d "temp_build/api_backup" ]; then
-    echo "Restoring API directory after build..."
-    rm -rf src/pages/api
-    mv temp_build/api_backup src/pages/api
-  fi
-  
-  # Restore the next-auth module if it was disabled
-  if [ -d "node_modules/next-auth-disabled" ]; then
-    echo "Restoring next-auth module..."
-    rm -rf node_modules/next-auth
-    mv node_modules/next-auth-disabled node_modules/next-auth
-  fi
-  
-  # Create API endpoint stubs in the dist directory
-  echo "Creating API endpoint stubs in dist..."
-  mkdir -p dist/api
-  cat > dist/api/index.js << EOL
-export function GET() {
-  return new Response(JSON.stringify({ message: "API stub" }), {
-    headers: { "content-type": "application/json" },
-  });
-}
-
-export function POST() {
-  return new Response(JSON.stringify({ message: "API stub" }), {
-    headers: { "content-type": "application/json" },
-  });
-}
-EOL
-else
-  echo "Full build failed, falling back to simplified build..."
-  
-  # Create dist directory if it doesn't exist
-  mkdir -p dist
+# Create dist directory if it doesn't exist
+mkdir -p dist
   
   # Copy public files to dist
   echo "Copying public files to dist..."

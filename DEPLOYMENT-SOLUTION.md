@@ -8,7 +8,7 @@ The Cloudflare Pages deployment was failing with the following issues:
 2. `wrangler.toml` was found but not considered valid for Pages configuration
 3. GitHub-related environment variables (`GITHUB_OWNER`, `GITHUB_REPO`, and `GITHUB_BRANCH`) were empty
 4. TinaCMS build process was failing
-5. NextAuth configuration causing build errors with `GithubProvider is not a function`
+5. NextAuth configuration causing build errors with `NextAuth is not a function`
 
 ## Solution Implemented
 
@@ -18,41 +18,98 @@ We've created a robust `build.sh` script that:
 
 - Sets required environment variables if they're not already set
 - Creates a `.env.production` file with all necessary variables
-- Fixes NextAuth configuration issues during build
-- Attempts to run the full TinaCMS build
-- Falls back to a simplified build if the TinaCMS build fails
+- Sets the environment to production to ensure NextAuth is not imported during build
+- Cleans the dist directory before building
+- Runs the build with environment-based conditional imports
 
 ### 2. Simplified Configuration Files
 
-We've created multiple configuration files to ensure compatibility with Cloudflare Pages:
+We've updated the `wrangler.toml` file to use the newer Cloudflare Pages syntax:
 
-- `wrangler.toml`
-- `cloudflare.toml`
-- `cloudflare-pages.toml`
-- `pages.toml`
+```toml
+# Cloudflare Pages Configuration
 
-All of these files use the same simplified configuration pointing to our build script.
+name = "wayne-leighton"
+compatibility_date = "2023-12-01"
+
+# Simplified configuration for Cloudflare Pages
+[build]
+command = "./build.sh"
+publish = "dist"
+
+[pages]
+pages_build_output_dir = "dist"
+```
 
 ### 3. NextAuth Configuration Fix
 
-We've fixed the NextAuth configuration to work properly with Astro's build process:
+We've implemented a cleaner solution for the NextAuth configuration to work properly with Astro's static build process:
 
-- Completely removes the entire API directory during the build process
-- Moves the API directory to a temporary location (`temp_build/api_backup`)
-- Temporarily removes the real next-auth module from node_modules during build
-- Creates a comprehensive mock next-auth implementation with:
-  - Both CommonJS and ESM exports
-  - Mock providers directory with GitHub provider
-  - Mock JWT module
-  - Complete package.json with proper exports configuration
-- Cleans up any existing dist directory to ensure no leftover files
-- Creates multiple API stub files to prevent build errors:
-  - A minimal TypeScript API stub
-  - An Astro-specific stub file to handle direct imports during build
-  - A direct stub for the specific problematic file (`dist/pages/api/auth/_---nextauth_.astro.mjs`)
-- Restores the original API directory and next-auth module after a successful build
-- Creates simple API endpoint stubs in the dist directory
-- This comprehensive approach ensures that any code trying to import NextAuth will receive a working mock implementation, preventing the `NextAuth is not a function` error that was causing builds to fail
+- Modified `[...nextauth].ts` to use environment-based conditional imports
+- In production (static build), the file exports simple 404 response handlers
+- In development, it dynamically imports NextAuth only when needed
+
+Here's the updated implementation:
+
+```typescript
+// In static builds (PROD), don't export any handlers that call NextAuth
+if (import.meta.env.PROD) {
+  // In static builds, don't export any handlers that call NextAuth
+  export const GET = () => new Response('Auth not available in static build', { status: 404 });
+  export const POST = () => new Response('Auth not available in static build', { status: 404 });
+} else {
+  // Only in development or SSR environments, dynamically import NextAuth
+  // ... auth configuration ...
+  
+  // Use dynamic import to avoid loading NextAuth during build
+  const getHandler = async () => {
+    const { default: NextAuth } = await import('next-auth');
+    return NextAuth(authOptions);
+  };
+
+  export const GET = async (request) => {
+    const handler = await getHandler();
+    return handler.GET(request);
+  };
+
+  export const POST = async (request) => {
+    const handler = await getHandler();
+    return handler.POST(request);
+  };
+}
+```
+  ## How It Works
+
+The solution leverages Astro's environment variables to conditionally import NextAuth only in development environments. During production builds, the auth endpoints return 404 responses, preventing any NextAuth-related code from being executed during the build process.
+
+This approach is cleaner and more maintainable than the previous solution that involved complex mocking and file manipulation during the build process.
+
+## Alternative Options
+
+If authentication is needed in the future, consider:
+
+1. Using `@auth/astro` instead of NextAuth directly:
+   ```bash
+   npm i @auth/astro @auth/core
+   ```
+
+2. Switching to SSR with `@astrojs/cloudflare` adapter if NextAuth must be kept:
+   ```bash
+   npm i @astrojs/cloudflare
+   ```
+   
+   And update `astro.config.mjs`:
+   ```javascript
+   import { defineConfig } from 'astro/config';
+   import cloudflare from '@astrojs/cloudflare';
+   
+   export default defineConfig({
+     output: 'server',
+     adapter: cloudflare(),
+   });
+   ```
+
+
 
 ### 4. Fallback Mechanism
 
