@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
-import GithubProvider from 'next-auth/providers/github';
+// Fix for Astro build - use dynamic import for GithubProvider
+import type { GithubProfile } from 'next-auth/providers/github';
 import type { JWT } from 'next-auth/jwt';
 
 // Extend the types to include our custom properties
@@ -17,16 +18,30 @@ declare module 'next-auth/jwt' {
 
 export default NextAuth({
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID || 'Ov23lio8ysSo7SIjtUEJ',
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+    {
+      id: 'github',
+      name: 'GitHub',
+      type: 'oauth',
       authorization: {
+        url: 'https://github.com/login/oauth/authorize',
         params: {
           // We need the 'repo' scope for TinaCMS to work with GitHub
           scope: 'repo',
         },
       },
-    }),
+      token: 'https://github.com/login/oauth/access_token',
+      userinfo: 'https://api.github.com/user',
+      clientId: process.env.GITHUB_CLIENT_ID || 'Ov23lio8ysSo7SIjtUEJ',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+      profile(profile: GithubProfile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+        };
+      },
+    },
   ],
   callbacks: {
     async jwt({ token, account }) {
