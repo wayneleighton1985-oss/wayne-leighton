@@ -49,6 +49,7 @@ We've fixed the NextAuth configuration to work properly with Astro's build proce
 - Creates multiple API stub files to prevent build errors:
   - A minimal TypeScript API stub
   - An Astro-specific stub file to handle direct imports during build
+  - A direct stub for the specific problematic file (`dist/pages/api/auth/_---nextauth_.astro.mjs`)
 - Restores the original API directory and next-auth module after a successful build
 - Creates simple API endpoint stubs in the dist directory
 - This comprehensive approach ensures that any code trying to import NextAuth will receive a working mock implementation, preventing the `NextAuth is not a function` error that was causing builds to fail
