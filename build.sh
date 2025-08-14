@@ -91,6 +91,27 @@ export function GET() {
 EOL
 fi
 
+# Create a .astro version of the API stub to handle any direct imports during build
+mkdir -p src/pages/api/auth
+cat > src/pages/api/auth/_nextauth.astro << EOL
+---
+// Empty API endpoint stub for Astro build
+---
+<script>
+  export function GET() {
+    return new Response(JSON.stringify({ message: "API stub" }), {
+      headers: { "content-type": "application/json" },
+    });
+  }
+
+  export function POST() {
+    return new Response(JSON.stringify({ message: "API stub" }), {
+      headers: { "content-type": "application/json" },
+    });
+  }
+</script>
+EOL
+
 # Temporarily remove next-auth from node_modules to prevent it from being used during build
 if [ -d "node_modules/next-auth" ]; then
   echo "Temporarily removing next-auth module..."
