@@ -31,11 +31,14 @@ We've updated the `wrangler.toml` file to use the newer Cloudflare Pages syntax:
 
 name = "wayne-leighton"
 compatibility_date = "2023-12-01"
+pages_build_output_dir = "dist"
+
+# Build configuration
 build.command = "./build.sh"
 build.output_directory = "dist"
 ```
 
-This configuration uses the correct format for Cloudflare Pages, avoiding the unsupported `[build]` section and using the proper `build.command` and `build.output_directory` properties instead.
+This configuration uses the correct format for Cloudflare Pages, with the required `pages_build_output_dir` property at the root level and proper build configuration using dot notation instead of the unsupported `[build]` section.
 ```
 
 ### 3. NextAuth Configuration Fix
