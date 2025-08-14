@@ -2,11 +2,9 @@
 
 name = "wayne-leighton"
 compatibility_date = "2023-12-01"
+pages_build_output_dir = "dist"
 
 # Simplified configuration for Cloudflare Pages
 [build]
 command = "./build.sh"
 publish = "dist"
-
-[pages]
-pages_build_output_dir = "dist"
