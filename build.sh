@@ -91,7 +91,13 @@ export function GET() {
 EOL
 fi
 
-echo "API directory temporarily removed for build."
+# Temporarily remove next-auth from node_modules to prevent it from being used during build
+if [ -d "node_modules/next-auth" ]; then
+  echo "Temporarily removing next-auth module..."
+  mv node_modules/next-auth node_modules/next-auth-disabled
+fi
+
+echo "API directory and next-auth module temporarily removed for build."
 
 echo "Auth configuration prepared for build."
 
@@ -105,6 +111,12 @@ if npm run build; then
     echo "Restoring API directory after build..."
     rm -rf src/pages/api
     mv temp_build/api_backup src/pages/api
+  fi
+  
+  # Restore the next-auth module if it was disabled
+  if [ -d "node_modules/next-auth-disabled" ]; then
+    echo "Restoring next-auth module..."
+    mv node_modules/next-auth-disabled node_modules/next-auth
   fi
   
   # Create API endpoint stubs in the dist directory

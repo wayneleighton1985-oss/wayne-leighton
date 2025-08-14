@@ -39,8 +39,9 @@ We've fixed the NextAuth configuration to work properly with Astro's build proce
 
 - Completely removes the entire API directory during the build process
 - Moves the API directory to a temporary location (`temp_build/api_backup`)
+- Temporarily removes the next-auth module from node_modules during build
 - Creates a minimal API stub file to prevent build errors
-- Restores the original API directory after a successful build
+- Restores the original API directory and next-auth module after a successful build
 - Creates simple API endpoint stubs in the dist directory
 - This radical approach completely bypasses the NextAuth processing during build, preventing the `NextAuth is not a function` error that was causing builds to fail
 
