@@ -8,6 +8,7 @@ The Cloudflare Pages deployment was failing with the following issues:
 2. `wrangler.toml` was found but not considered valid for Pages configuration
 3. GitHub-related environment variables (`GITHUB_OWNER`, `GITHUB_REPO`, and `GITHUB_BRANCH`) were empty
 4. TinaCMS build process was failing
+5. NextAuth configuration causing build errors with `GithubProvider is not a function`
 
 ## Solution Implemented
 
@@ -17,6 +18,7 @@ We've created a robust `build.sh` script that:
 
 - Sets required environment variables if they're not already set
 - Creates a `.env.production` file with all necessary variables
+- Fixes NextAuth configuration issues during build
 - Attempts to run the full TinaCMS build
 - Falls back to a simplified build if the TinaCMS build fails
 
@@ -31,7 +33,15 @@ We've created multiple configuration files to ensure compatibility with Cloudfla
 
 All of these files use the same simplified configuration pointing to our build script.
 
-### 3. Fallback Mechanism
+### 3. NextAuth Configuration Fix
+
+We've fixed the NextAuth configuration to work properly with Astro's build process:
+
+- Replaced the direct import of `GithubProvider` with a manual provider configuration
+- Updated the build script to automatically fix the auth configuration during deployment
+- This resolves the `GithubProvider is not a function` error that was causing builds to fail
+
+### 4. Fallback Mechanism
 
 If the full build fails, the build script creates a minimal working site to ensure something is always deployed.
 
