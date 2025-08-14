@@ -40,9 +40,10 @@ We've fixed the NextAuth configuration to work properly with Astro's build proce
 - Backs up the original NextAuth file and replaces it with a simplified stub version during build
 - Creates specific stub files for the problematic `_---nextauth_.astro` and `_---nextauth_.astro.mjs` files
 - Pre-creates these files in the `dist` directory structure before the build process starts
+- Implements a mock `NextAuth` function in the stub files to prevent the "NextAuth is not a function" error
 - Restores the original NextAuth file after successful build
 - Creates API endpoint stubs in the dist directory
-- This resolves the `NextAuth is not a function` error that was causing builds to fail
+- This comprehensive approach resolves the `NextAuth is not a function` error that was causing builds to fail
 
 ### 4. Fallback Mechanism
 
