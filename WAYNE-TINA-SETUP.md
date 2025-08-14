@@ -67,4 +67,10 @@ If you encounter any issues with TinaCMS:
 1. Check that the environment variables are correctly set.
 2. Ensure that the GitHub personal access token has the correct permissions.
 3. Check the browser console for any error messages.
-4. Refer to the [TinaCMS documentation](https://tina.io/docs/) for more information.
+4. Verify that the `_redirects` file in the `public` directory contains the following lines:
+   ```
+   /admin/* /admin/:splat 200
+   /* /index.html 200
+   ```
+   This ensures that the admin assets are correctly served and not redirected to the main index.html.
+5. Refer to the [TinaCMS documentation](https://tina.io/docs/) for more information.
