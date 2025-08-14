@@ -97,7 +97,32 @@ if [ -d "node_modules/next-auth" ]; then
   mv node_modules/next-auth node_modules/next-auth-disabled
 fi
 
-echo "API directory and next-auth module temporarily removed for build."
+# Create a mock next-auth module to prevent import errors
+mkdir -p node_modules/next-auth
+cat > node_modules/next-auth/index.js << EOL
+// Mock NextAuth module
+function NextAuth() {
+  return {
+    GET: function() {
+      return new Response(JSON.stringify({ message: "Auth API stub" }));
+    },
+    POST: function() {
+      return new Response(JSON.stringify({ message: "Auth API stub" }));
+    }
+  };
+}
+
+module.exports = NextAuth;
+module.exports.default = NextAuth;
+EOL
+
+# Clean up any existing dist directory to ensure no leftover files
+if [ -d "dist" ]; then
+  echo "Removing existing dist directory..."
+  rm -rf dist
+fi
+
+echo "API directory modified and next-auth module replaced with mock for build."
 
 echo "Auth configuration prepared for build."
 
@@ -116,6 +141,7 @@ if npm run build; then
   # Restore the next-auth module if it was disabled
   if [ -d "node_modules/next-auth-disabled" ]; then
     echo "Restoring next-auth module..."
+    rm -rf node_modules/next-auth
     mv node_modules/next-auth-disabled node_modules/next-auth
   fi
   
