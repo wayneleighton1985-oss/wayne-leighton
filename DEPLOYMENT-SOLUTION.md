@@ -48,6 +48,7 @@ We've implemented a cleaner solution for the NextAuth configuration to work prop
 - Modified `[...nextauth].ts` to use a try-catch approach with dynamic imports
 - Removed conditional environment checks that were causing build errors
 - Added error handling to gracefully handle cases where NextAuth can't be loaded
+- Implemented `getStaticPaths()` function to satisfy Astro's requirement for dynamic routes in static mode
 - Simplified the export syntax to be compatible with Astro's static build process
 
 Here's the updated implementation:
