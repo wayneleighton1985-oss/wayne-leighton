@@ -4,10 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "./setup-env.sh && tinacms build && astro build",
+    "build": "bash ./setup-env.sh && tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "setup-env": "./setup-env.sh"
+    "setup-env": "bash ./setup-env.sh"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
