@@ -4,6 +4,6 @@ name = "wayne-leighton"
 
 # Simplified configuration for Cloudflare Pages
 [build]
-command = "npm run build"
+command = "./build.sh"
 publish = "dist"
 pages_build_output_dir = "dist"
