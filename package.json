@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "bash ./setup-env.sh && tinacms build && astro build",
+    "build": "bash ./setup-env.sh && echo \"Starting TinaCMS build with client ID: $NEXT_PUBLIC_TINA_CLIENT_ID\" && tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "setup-env": "bash ./setup-env.sh"
