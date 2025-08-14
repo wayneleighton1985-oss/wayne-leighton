@@ -61,8 +61,14 @@ const authOptions: NextAuthOptions = {
   },
 };
 
-// For static builds, we'll use a simpler approach without conditional imports
-// that might cause build issues
+// For static builds, we need to implement getStaticPaths for dynamic routes
+
+// This function is required for dynamic routes in static mode
+export function getStaticPaths() {
+  // Return an empty array since we don't actually want to generate any paths
+  // This is just to satisfy Astro's requirement for dynamic routes
+  return [];
+}
 
 // Import NextAuth dynamically to prevent build errors
 async function getNextAuth() {
@@ -75,7 +81,7 @@ async function getNextAuth() {
   }
 }
 
-// Export GET and POST handlers
+// Export GET handler
 export async function GET(request: Request) {
   try {
     const handler = await getNextAuth();
