@@ -2,13 +2,11 @@
 
 name = "wayne-leighton"
 
-[site]
-production_branch = "main"
-
+# Cloudflare Pages specific configuration
 [build]
 command = "npm run build"
 publish = "dist"
-pages_build_output_dir = "dist"
+output_directory = "dist"
 
 [build.environment]
 NODE_VERSION = "18"
