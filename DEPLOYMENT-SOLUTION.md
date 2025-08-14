@@ -40,7 +40,11 @@ We've fixed the NextAuth configuration to work properly with Astro's build proce
 - Completely removes the entire API directory during the build process
 - Moves the API directory to a temporary location (`temp_build/api_backup`)
 - Temporarily removes the real next-auth module from node_modules during build
-- Creates a mock next-auth module with the expected NextAuth function
+- Creates a comprehensive mock next-auth implementation with:
+  - Both CommonJS and ESM exports
+  - Mock providers directory with GitHub provider
+  - Mock JWT module
+  - Complete package.json with proper exports configuration
 - Cleans up any existing dist directory to ensure no leftover files
 - Creates a minimal API stub file to prevent build errors
 - Restores the original API directory and next-auth module after a successful build

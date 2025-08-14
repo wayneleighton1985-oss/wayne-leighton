@@ -112,8 +112,83 @@ function NextAuth() {
   };
 }
 
-module.exports = NextAuth;
-module.exports.default = NextAuth;
+export default NextAuth;
+export { NextAuth };
+EOL
+
+# Also create an ESM version with .mjs extension
+cat > node_modules/next-auth/index.mjs << EOL
+// Mock NextAuth module (ESM version)
+function NextAuth() {
+  return {
+    GET: function() {
+      return new Response(JSON.stringify({ message: "Auth API stub" }));
+    },
+    POST: function() {
+      return new Response(JSON.stringify({ message: "Auth API stub" }));
+    }
+  };
+}
+
+export default NextAuth;
+export { NextAuth };
+EOL
+
+# Create providers directory and GitHub provider
+mkdir -p node_modules/next-auth/providers
+cat > node_modules/next-auth/providers/github.js << EOL
+// Mock GitHub provider
+export default function GitHub(options) {
+  return {
+    id: 'github',
+    name: 'GitHub',
+    type: 'oauth',
+    ...options
+  };
+}
+
+export { GitHub };
+EOL
+
+cat > node_modules/next-auth/providers/index.js << EOL
+export { default as GitHub } from './github.js';
+EOL
+
+# Create JWT module
+mkdir -p node_modules/next-auth/jwt
+cat > node_modules/next-auth/jwt/index.js << EOL
+// Mock JWT module
+export function decode() {
+  return { token: {} };
+}
+
+export function encode() {
+  return "mock.jwt.token";
+}
+
+export function getToken() {
+  return { token: {} };
+}
+EOL
+
+# Create a package.json to specify module type
+cat > node_modules/next-auth/package.json << EOL
+{
+  "name": "next-auth",
+  "version": "4.24.5",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./providers/*": "./providers/*",
+    "./jwt": "./jwt/index.js"
+  },
+  "sideEffects": false
+}
 EOL
 
 # Clean up any existing dist directory to ensure no leftover files
