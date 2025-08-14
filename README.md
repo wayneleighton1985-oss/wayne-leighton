@@ -40,17 +40,41 @@ Each book is available in two formats:
    - For testing, you can use Snipcart's test mode
 
 4. **Configure TinaCMS**
-   - The local development environment is already configured with test credentials in `.env`
-   - For production, ensure the environment variables in `.env.production` are set correctly
+   - For local development, run the setup script:
+     ```bash
+     npm run setup-tina:dev
+     # or directly: ./setup-tina-dev.sh
+     ```
+   - For production deployment, run the production setup script:
+     ```bash
+     npm run setup-tina:prod
+     # or directly: ./setup-tina-prod.sh
+     ```
+   - These scripts will create the appropriate environment files with the correct settings
+   - For more detailed information about TinaCMS setup and troubleshooting, see [TINACMS-SETUP.md](./TINACMS-SETUP.md)
 
 5. **Start the development server**
    ```bash
    npm run dev
    ```
+   Access the site at http://localhost:4321/ and the TinaCMS admin interface at http://localhost:4321/admin/index.html
 
-6. **Open your browser**
-   - Navigate to `http://localhost:4321` to see the website
-   - Navigate to `http://localhost:4001/admin` to access the TinaCMS admin interface
+6. **Build and deploy for production**
+   ```bash
+   npm run deploy:prod  # Interactive deployment workflow
+   ```
+   Or manually:
+   ```bash
+   npm run build:full  # Build for production
+   npm run preview     # Preview the production build
+   ```
+   Access the production preview at http://localhost:4322/ and the TinaCMS admin interface at http://localhost:4322/admin/index.html
+
+7. **Open your browser**
+    - For development: Navigate to `http://localhost:4321` to see the website
+    - For development: Navigate to `http://localhost:4321/admin/index.html` to access the TinaCMS admin interface
+    - For production preview: Navigate to `http://localhost:4322` to see the website
+    - For production preview: Navigate to `http://localhost:4322/admin/index.html` to access the TinaCMS admin interface
 
 ## 📝 Available Scripts
 

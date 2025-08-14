@@ -19,6 +19,16 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public",
+    basePath: "", // Empty basePath for correct asset loading
+  },
+  
+  // Configure the API URL for TinaCMS
+  // The API URL must be set in the correct location based on TinaCMS type definitions
+  backend: {
+    // Using the apiURL property within the backend configuration object
+    apiUrl: process.env.TINA_PUBLIC_IS_LOCAL === 'true'
+      ? 'http://localhost:4001/graphql'
+      : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${branch}`,
   },
   media: {
     tina: {

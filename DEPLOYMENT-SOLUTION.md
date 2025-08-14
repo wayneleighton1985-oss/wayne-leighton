@@ -24,7 +24,7 @@ We've created a robust `build.sh` script that:
 
 ### 2. Simplified Configuration Files
 
-We've updated the `wrangler.toml` file to use the newer Cloudflare Pages syntax:
+We've updated the `wrangler.toml` file to use the correct Cloudflare Pages syntax:
 
 ```toml
 # Cloudflare Pages Configuration
@@ -32,13 +32,9 @@ We've updated the `wrangler.toml` file to use the newer Cloudflare Pages syntax:
 name = "wayne-leighton"
 compatibility_date = "2023-12-01"
 pages_build_output_dir = "dist"
-
-# Build configuration
-build.command = "./build.sh"
-build.output_directory = "dist"
 ```
 
-This configuration uses the correct format for Cloudflare Pages, with the required `pages_build_output_dir` property at the root level and proper build configuration using dot notation instead of the unsupported `[build]` section.
+This configuration uses the correct format for Cloudflare Pages, with the required `pages_build_output_dir` property at the root level. The build configuration is not supported in `wrangler.toml` for Pages projects and should be defined in the Cloudflare dashboard or in separate configuration files like `cloudflare-pages.toml` or `pages.toml` which use the `[build]` section format.
 ```
 
 ### 3. NextAuth Configuration Fix

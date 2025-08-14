@@ -13,7 +13,7 @@ To deploy this project to Cloudflare Pages using GitHub Actions, you need to set
    - Description: The TinaCMS token
 
 3. **TINA_GITHUB_OWNER**
-   - Value: `CLAYYO`
+   - Value: `wayneleighton1985-oss`
    - Description: The GitHub username or organization that owns the repository
 
 4. **TINA_GITHUB_REPO**
