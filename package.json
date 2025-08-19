@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "npx tinacms build && astro build && cp -r public/admin dist/",
-    "build:full": "bash ./setup-env.sh && . .env.production && export $(cat .env.production | xargs) && echo \"Starting TinaCMS build with client ID: $NEXT_PUBLIC_TINA_CLIENT_ID\" && tinacms build && astro build && cp -r public/admin dist/",
+    "build:full": "bash -c './setup-env.sh && source .env.production && export $(cat .env.production | xargs) && echo \"Starting TinaCMS build with client ID: $NEXT_PUBLIC_TINA_CLIENT_ID\" && tinacms build && astro build && cp -r public/admin dist/'",
     "preview": "astro preview",
     "astro": "astro",
     "setup-env": "bash ./setup-env.sh",
