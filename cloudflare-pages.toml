@@ -1,5 +1,5 @@
 # Cloudflare Pages Configuration
 
 [build]
-command = "./build.sh"
+command = "npm run build:full"
 publish = "dist"
