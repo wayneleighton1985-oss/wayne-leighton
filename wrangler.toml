@@ -1,5 +1,5 @@
 # Cloudflare Pages Configuration
 
-name = "wayne-leighton"
-compatibility_date = "2023-12-01"
+name = "wayne-leighton-books"
+compatibility_date = "2024-01-01"
 pages_build_output_dir = "dist"
