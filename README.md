@@ -1,6 +1,8 @@
-# Wayne Leighton Books - E-commerce Website
+# Wayne Leighton Books
 
 A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind CSS, and Snipcart for selling Wayne Leighton's collection of business and leadership books. Content management is handled by TinaCMS.
+
+<!-- Deployment trigger: 2024-12-16 -->
 
 ## 🚀 Features
 
