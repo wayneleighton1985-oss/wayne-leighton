@@ -3,4 +3,6 @@
 name = "wayne-leighton"
 compatibility_date = "2023-12-01"
 pages_build_output_dir = "dist"
-# Removed build configuration as it's not supported in Cloudflare Pages projects
+
+[build]
+command = "npm run build:full"
