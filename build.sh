@@ -8,7 +8,7 @@ if [ -z "$NEXT_PUBLIC_TINA_CLIENT_ID" ]; then
   export NEXT_PUBLIC_TINA_CLIENT_ID="56844d01-3e31-4c3c-b165-956a1f1e0198"
   export TINA_TOKEN="7a0024bf17443a12d8bf5054e078bd42af60c5e0"
   export TINA_PUBLIC_IS_LOCAL="false"
-  export GITHUB_OWNER="CLAYYO"
+  export GITHUB_OWNER="wayneleighton1985-oss"
   export GITHUB_REPO="wayne-leighton"
   export GITHUB_BRANCH="main"
   export GITHUB_PERSONAL_ACCESS_TOKEN="7a0024bf17443a12d8bf5054e078bd42af60c5e0"
