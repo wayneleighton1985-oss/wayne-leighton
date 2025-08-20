@@ -5,7 +5,7 @@ description: >-
   Transformative books on lawfare, legal strategy, and fighting institutional
   abuse. Discover insights that will empower you to take control of your
   battles.
-copyrightYear: 2027
+copyrightYear: 2025
 copyrightText: Find Your Passion. All rights reserved.
 socialMedia:
   twitter: ''
