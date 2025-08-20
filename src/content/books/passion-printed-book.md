@@ -10,7 +10,7 @@ price: 30
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2025
-pages: 280
+pages: 648
 isbn: ''
 ---
 
