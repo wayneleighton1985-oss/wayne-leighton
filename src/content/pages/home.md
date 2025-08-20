@@ -14,7 +14,9 @@ hero:
     url: '#featured'
 featuredBooks:
   title: Featured Books
-  description: Discover powerful resources to help you navigate the legal system and fight back against corruption.
+  description: >-
+    Discover powerful resources to help you navigate the legal system and fight
+    back against corruption.
   viewAllButton:
     text: View All Books
     url: /shop
@@ -28,18 +30,24 @@ testimonials:
   title: Reader Testimonials
   description: Hear from those who have used Wayne's books to fight back and win.
   items:
-    - quote: Wayne's book gave me the confidence and knowledge to stand up to a corrupt judge. I won my case and exposed their misconduct.
-      author: Michael T., London
+    - quote: >-
+        Wayne's book gave me the confidence and knowledge to stand up to a
+        corrupt judge. I won my case and exposed their misconduct.
+      author: 'Michael T., London'
       rating: 5
-    - quote: The strategies in this book saved me thousands in legal fees and helped me navigate a complex legal situation with confidence.
-      author: Sarah K., Manchester
+    - quote: >-
+        The strategies in this book saved me thousands in legal fees and helped
+        me navigate a complex legal situation with confidence.
+      author: 'Sarah K., Manchester'
       rating: 5
-    - quote: Eye-opening and practical. This book revealed how the system really works and gave me tools to protect myself and my family.
-      author: James B., Edinburgh
+    - quote: >-
+        Eye-opening and practical. This book revealed how the system really
+        works and gave me tools to protect myself and my family.
+      author: 'James B., Edinburgh'
       rating: 5
 ---
 
-# Transforms Your Passion -  Fighting Back
+# Transformer Your Passion -  Fighting Back
 
 Discover Wayne Leighton's collection of transformative books on lawfare, court trials and successes against the state. These books provide powerful insights and strategies for those facing legal challenges and institutional abuse.
 
