@@ -1,5 +1,5 @@
 ---
-title: PASSION Printed Book + Seminar Ticket
+title: PASSION Hard Copy + Seminar Ticket
 author: Wayne Leighton
 description: >
   A True Life Story About A Broken Child Living In A Residential Children's Home
@@ -20,3 +20,7 @@ isbn: ''
 A True Life Story About A Broken Child Living In A Residential Children's Home Who Travels The World, Embarking On An Epic Journey That's Ambushed By Persecution, Resulting In A Voracious Fight Of Trials And Tribulations
 
 This package includes both the printed book and a ticket to Wayne's exclusive seminar where he shares the strategies and techniques he used in his legal battles against various authorities.
+
+Pre order from this link now [https://square.link/u/tsoJ7yAO](https://square.link/u/tsoJ7yAO)
+
+Release date 5 February 2027 
