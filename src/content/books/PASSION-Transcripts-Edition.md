@@ -14,7 +14,7 @@ description: >
   to judgment. It also includes all the corrupted investigations and complaint
   coverup decisions.
 format: Transcripts Edition
-price: 157
+price: 159
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2027
@@ -41,83 +41,9 @@ The book is about ‘what’ I did. This seminar explains ‘how’ I did it. Fu
 
 \*  DVLA
 
-Pre-order this book now 
+Pre-order this book now from this link [https://square.link/u/J0D66LFF](https://square.link/u/J0D66LFF)
 
-\<div style="
-
-  overflow: auto;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: flex-end;
-
-  align-items: center;
-
-  width: 259px;
-
-  background: #FFFFFF;
-
-  border: 1px solid rgba(0, 0, 0, 0.1);
-
-  box-shadow: -2px 10px 5px rgba(0, 0, 0, 0);
-
-  border-radius: 10px;
-
-  font-family: SQ Market, SQ Market, Helvetica, Arial, sans-serif;
-
-  ">
-
-    \<img src="https\://items-images-production.s3.us-west-2.amazonaws.com/files/39042573733c7492f2c23140d996106b18c6bee2/original.png" alt="Passion E-Book" onerror="this.style.display='none'" style="width: 100%;">
-
-  \<div style="padding: 20px;">
-
-      \<p style="
-
-    font-size: 18px;
-
-    line-height: 20px;
-
-  ">Passion E-Book\</p>
-
-      \<p style="
-
-    font-size: 18px;
-
-    line-height: 20px;
-
-    font-weight: 600;
-
-  ">£20.00\</p>
-
-    \<a target="\_blank" href="https\://square.link/u/XvIkWoXu?src=embed" style="
-
-    display: inline-block;
-
-    font-size: 18px;
-
-    line-height: 48px;
-
-    height: 48px;
-
-    color: #ffffff;
-
-    min-width: 212px;
-
-    background-color: #006aff;
-
-    text-align: center;
-
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
-
-    border-radius: 6px;
-
-  ">Buy now\</a>
-
-  \</div>
-
-\</div>
+Release date 5 February 2027
 
 ```
 ```
