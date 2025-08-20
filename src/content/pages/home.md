@@ -5,7 +5,7 @@ description: >-
   trials and successes against the state.
 ---
 
-# Transforms! Your Passion -  Fighting Back
+# Transforms Your Passion -  Fighting Back
 
 Discover Wayne Leighton's collection of transformative books on lawfare, court trials and successes against the state. These books provide powerful insights and strategies for those facing legal challenges and institutional abuse.
 
