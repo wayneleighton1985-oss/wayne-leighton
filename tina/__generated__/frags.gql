@@ -19,3 +19,25 @@ fragment PagesParts on Pages {
   description
   body
 }
+
+fragment FooterParts on Footer {
+  __typename
+  title
+  companyName
+  description
+  copyrightYear
+  copyrightText
+  socialMedia {
+    __typename
+    twitter
+    facebook
+    linkedin
+  }
+  facebookGroup {
+    __typename
+    title
+    description
+    url
+    buttonText
+  }
+}

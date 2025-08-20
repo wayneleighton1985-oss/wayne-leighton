@@ -138,6 +138,101 @@ var config_default = defineConfig({
             isBody: true
           }
         ]
+      },
+      {
+        name: "footer",
+        label: "Footer",
+        path: "src/content/footer",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Footer Title",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "companyName",
+            label: "Company Name",
+            required: true
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Company Description",
+            required: true
+          },
+          {
+            type: "number",
+            name: "copyrightYear",
+            label: "Copyright Year",
+            required: true
+          },
+          {
+            type: "string",
+            name: "copyrightText",
+            label: "Copyright Text",
+            required: true
+          },
+          {
+            type: "object",
+            name: "socialMedia",
+            label: "Social Media Links",
+            fields: [
+              {
+                type: "string",
+                name: "twitter",
+                label: "Twitter URL",
+                required: false
+              },
+              {
+                type: "string",
+                name: "facebook",
+                label: "Facebook URL",
+                required: false
+              },
+              {
+                type: "string",
+                name: "linkedin",
+                label: "LinkedIn URL",
+                required: false
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "facebookGroup",
+            label: "Facebook Group",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Group Title",
+                required: true
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Group Description",
+                required: true
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "Group URL",
+                required: true
+              },
+              {
+                type: "string",
+                name: "buttonText",
+                label: "Button Text",
+                required: true
+              }
+            ]
+          }
+        ]
       }
     ]
   }

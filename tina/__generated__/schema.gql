@@ -58,11 +58,14 @@ type Query {
   booksConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BooksFilter): BooksConnection!
   pages(relativePath: String): Pages!
   pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
+  footer(relativePath: String): Footer!
+  footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
 }
 
 input DocumentFilter {
   books: BooksFilter
   pages: PagesFilter
+  footer: FooterFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,7 +91,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Books | Pages | Folder
+union DocumentNode = Books | Pages | Footer | Folder
 
 type Books implements Node & Document {
   title: String!
@@ -188,6 +191,66 @@ type PagesConnection implements Connection {
   edges: [PagesConnectionEdges]
 }
 
+type FooterSocialMedia {
+  twitter: String
+  facebook: String
+  linkedin: String
+}
+
+type FooterFacebookGroup {
+  title: String!
+  description: String!
+  url: String!
+  buttonText: String!
+}
+
+type Footer implements Node & Document {
+  title: String!
+  companyName: String!
+  description: String!
+  copyrightYear: Float!
+  copyrightText: String!
+  socialMedia: FooterSocialMedia
+  facebookGroup: FooterFacebookGroup
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FooterSocialMediaFilter {
+  twitter: StringFilter
+  facebook: StringFilter
+  linkedin: StringFilter
+}
+
+input FooterFacebookGroupFilter {
+  title: StringFilter
+  description: StringFilter
+  url: StringFilter
+  buttonText: StringFilter
+}
+
+input FooterFilter {
+  title: StringFilter
+  companyName: StringFilter
+  description: StringFilter
+  copyrightYear: NumberFilter
+  copyrightText: StringFilter
+  socialMedia: FooterSocialMediaFilter
+  facebookGroup: FooterFacebookGroupFilter
+}
+
+type FooterConnectionEdges {
+  cursor: String!
+  node: Footer
+}
+
+type FooterConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FooterConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -198,17 +261,21 @@ type Mutation {
   createBooks(relativePath: String!, params: BooksMutation!): Books!
   updatePages(relativePath: String!, params: PagesMutation!): Pages!
   createPages(relativePath: String!, params: PagesMutation!): Pages!
+  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
+  createFooter(relativePath: String!, params: FooterMutation!): Footer!
 }
 
 input DocumentUpdateMutation {
   books: BooksMutation
   pages: PagesMutation
+  footer: FooterMutation
   relativePath: String
 }
 
 input DocumentMutation {
   books: BooksMutation
   pages: PagesMutation
+  footer: FooterMutation
 }
 
 input BooksMutation {
@@ -229,6 +296,29 @@ input PagesMutation {
   title: String
   description: String
   body: JSON
+}
+
+input FooterSocialMediaMutation {
+  twitter: String
+  facebook: String
+  linkedin: String
+}
+
+input FooterFacebookGroupMutation {
+  title: String
+  description: String
+  url: String
+  buttonText: String
+}
+
+input FooterMutation {
+  title: String
+  companyName: String
+  description: String
+  copyrightYear: Float
+  copyrightText: String
+  socialMedia: FooterSocialMediaMutation
+  facebookGroup: FooterFacebookGroupMutation
 }
 
 schema {

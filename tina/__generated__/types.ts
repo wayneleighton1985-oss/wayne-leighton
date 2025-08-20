@@ -86,6 +86,8 @@ export type Query = {
   booksConnection: BooksConnection;
   pages: Pages;
   pagesConnection: PagesConnection;
+  footer: Footer;
+  footerConnection: FooterConnection;
 };
 
 
@@ -139,9 +141,25 @@ export type QueryPagesConnectionArgs = {
   filter?: InputMaybe<PagesFilter>;
 };
 
+
+export type QueryFooterArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFooterConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+};
+
 export type DocumentFilter = {
   books?: InputMaybe<BooksFilter>;
   pages?: InputMaybe<PagesFilter>;
+  footer?: InputMaybe<FooterFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -181,7 +199,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Books | Pages | Folder;
+export type DocumentNode = Books | Pages | Footer | Folder;
 
 export type Books = Node & Document & {
   __typename?: 'Books';
@@ -287,6 +305,71 @@ export type PagesConnection = Connection & {
   edges?: Maybe<Array<Maybe<PagesConnectionEdges>>>;
 };
 
+export type FooterSocialMedia = {
+  __typename?: 'FooterSocialMedia';
+  twitter?: Maybe<Scalars['String']['output']>;
+  facebook?: Maybe<Scalars['String']['output']>;
+  linkedin?: Maybe<Scalars['String']['output']>;
+};
+
+export type FooterFacebookGroup = {
+  __typename?: 'FooterFacebookGroup';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  buttonText: Scalars['String']['output'];
+};
+
+export type Footer = Node & Document & {
+  __typename?: 'Footer';
+  title: Scalars['String']['output'];
+  companyName: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  copyrightYear: Scalars['Float']['output'];
+  copyrightText: Scalars['String']['output'];
+  socialMedia?: Maybe<FooterSocialMedia>;
+  facebookGroup?: Maybe<FooterFacebookGroup>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FooterSocialMediaFilter = {
+  twitter?: InputMaybe<StringFilter>;
+  facebook?: InputMaybe<StringFilter>;
+  linkedin?: InputMaybe<StringFilter>;
+};
+
+export type FooterFacebookGroupFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
+};
+
+export type FooterFilter = {
+  title?: InputMaybe<StringFilter>;
+  companyName?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  copyrightYear?: InputMaybe<NumberFilter>;
+  copyrightText?: InputMaybe<StringFilter>;
+  socialMedia?: InputMaybe<FooterSocialMediaFilter>;
+  facebookGroup?: InputMaybe<FooterFacebookGroupFilter>;
+};
+
+export type FooterConnectionEdges = {
+  __typename?: 'FooterConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Footer>;
+};
+
+export type FooterConnection = Connection & {
+  __typename?: 'FooterConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -298,6 +381,8 @@ export type Mutation = {
   createBooks: Books;
   updatePages: Pages;
   createPages: Pages;
+  updateFooter: Footer;
+  createFooter: Footer;
 };
 
 
@@ -357,15 +442,29 @@ export type MutationCreatePagesArgs = {
   params: PagesMutation;
 };
 
+
+export type MutationUpdateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
+
+export type MutationCreateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
 export type DocumentUpdateMutation = {
   books?: InputMaybe<BooksMutation>;
   pages?: InputMaybe<PagesMutation>;
+  footer?: InputMaybe<FooterMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   books?: InputMaybe<BooksMutation>;
   pages?: InputMaybe<PagesMutation>;
+  footer?: InputMaybe<FooterMutation>;
 };
 
 export type BooksMutation = {
@@ -388,9 +487,34 @@ export type PagesMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type FooterSocialMediaMutation = {
+  twitter?: InputMaybe<Scalars['String']['input']>;
+  facebook?: InputMaybe<Scalars['String']['input']>;
+  linkedin?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterFacebookGroupMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  companyName?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  copyrightYear?: InputMaybe<Scalars['Float']['input']>;
+  copyrightText?: InputMaybe<Scalars['String']['input']>;
+  socialMedia?: InputMaybe<FooterSocialMediaMutation>;
+  facebookGroup?: InputMaybe<FooterFacebookGroupMutation>;
+};
+
 export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn?: string | null, body?: any | null };
 
 export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null };
+
+export type FooterPartsFragment = { __typename: 'Footer', title: string, companyName: string, description: string, copyrightYear: number, copyrightText: string, socialMedia?: { __typename: 'FooterSocialMedia', twitter?: string | null, facebook?: string | null, linkedin?: string | null } | null, facebookGroup?: { __typename: 'FooterFacebookGroup', title: string, description: string, url: string, buttonText: string } | null };
 
 export type BooksQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -430,6 +554,25 @@ export type PagesConnectionQueryVariables = Exact<{
 
 export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type FooterQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type FooterQuery = { __typename?: 'Query', footer: { __typename: 'Footer', id: string, title: string, companyName: string, description: string, copyrightYear: number, copyrightText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialMedia?: { __typename: 'FooterSocialMedia', twitter?: string | null, facebook?: string | null, linkedin?: string | null } | null, facebookGroup?: { __typename: 'FooterFacebookGroup', title: string, description: string, url: string, buttonText: string } | null } };
+
+export type FooterConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+}>;
+
+
+export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, title: string, companyName: string, description: string, copyrightYear: number, copyrightText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialMedia?: { __typename: 'FooterSocialMedia', twitter?: string | null, facebook?: string | null, linkedin?: string | null } | null, facebookGroup?: { __typename: 'FooterFacebookGroup', title: string, description: string, url: string, buttonText: string } | null } | null } | null> | null } };
+
 export const BooksPartsFragmentDoc = gql`
     fragment BooksParts on Books {
   __typename
@@ -452,6 +595,29 @@ export const PagesPartsFragmentDoc = gql`
   title
   description
   body
+}
+    `;
+export const FooterPartsFragmentDoc = gql`
+    fragment FooterParts on Footer {
+  __typename
+  title
+  companyName
+  description
+  copyrightYear
+  copyrightText
+  socialMedia {
+    __typename
+    twitter
+    facebook
+    linkedin
+  }
+  facebookGroup {
+    __typename
+    title
+    description
+    url
+    buttonText
+  }
 }
     `;
 export const BooksDocument = gql`
@@ -568,6 +734,63 @@ export const PagesConnectionDocument = gql`
   }
 }
     ${PagesPartsFragmentDoc}`;
+export const FooterDocument = gql`
+    query footer($relativePath: String!) {
+  footer(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FooterParts
+  }
+}
+    ${FooterPartsFragmentDoc}`;
+export const FooterConnectionDocument = gql`
+    query footerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FooterFilter) {
+  footerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FooterParts
+      }
+    }
+  }
+}
+    ${FooterPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -582,6 +805,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     pagesConnection(variables?: PagesConnectionQueryVariables, options?: C): Promise<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}> {
         return requester<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}, PagesConnectionQueryVariables>(PagesConnectionDocument, variables, options);
+      },
+    footer(variables: FooterQueryVariables, options?: C): Promise<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}> {
+        return requester<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}, FooterQueryVariables>(FooterDocument, variables, options);
+      },
+    footerConnection(variables?: FooterConnectionQueryVariables, options?: C): Promise<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}> {
+        return requester<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}, FooterConnectionQueryVariables>(FooterConnectionDocument, variables, options);
       }
     };
   }
