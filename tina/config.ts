@@ -143,6 +143,184 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "object",
+            name: "hero",
+            label: "Hero Section",
+            fields: [
+              {
+                type: "string",
+                name: "logoUrl",
+                label: "Logo URL",
+                required: false,
+              },
+              {
+                type: "string",
+                name: "logoAlt",
+                label: "Logo Alt Text",
+                required: false,
+              },
+              {
+                type: "object",
+                name: "primaryButton",
+                label: "Primary Button",
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Button Text",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "url",
+                    label: "Button URL",
+                    required: true,
+                  },
+                ],
+              },
+              {
+                type: "object",
+                name: "secondaryButton",
+                label: "Secondary Button",
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Button Text",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "url",
+                    label: "Button URL",
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "featuredBooks",
+            label: "Featured Books Section",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Section Title",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Section Description",
+                required: true,
+              },
+              {
+                type: "object",
+                name: "viewAllButton",
+                label: "View All Button",
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Button Text",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "url",
+                    label: "Button URL",
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "about",
+            label: "About Section",
+            fields: [
+              {
+                type: "string",
+                name: "imageUrl",
+                label: "Wayne's Photo URL",
+                required: false,
+              },
+              {
+                type: "string",
+                name: "imageAlt",
+                label: "Photo Alt Text",
+                required: false,
+              },
+              {
+                type: "object",
+                name: "learnMoreButton",
+                label: "Learn More Button",
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Button Text",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "url",
+                    label: "Button URL",
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "testimonials",
+            label: "Testimonials Section",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Section Title",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Section Description",
+                required: true,
+              },
+              {
+                type: "object",
+                name: "items",
+                label: "Testimonials",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "quote",
+                    label: "Testimonial Quote",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "author",
+                    label: "Author Name",
+                    required: true,
+                  },
+                  {
+                    type: "number",
+                    name: "rating",
+                    label: "Star Rating (1-5)",
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Page Content",

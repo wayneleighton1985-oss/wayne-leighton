@@ -17,6 +17,52 @@ fragment PagesParts on Pages {
   __typename
   title
   description
+  hero {
+    __typename
+    logoUrl
+    logoAlt
+    primaryButton {
+      __typename
+      text
+      url
+    }
+    secondaryButton {
+      __typename
+      text
+      url
+    }
+  }
+  featuredBooks {
+    __typename
+    title
+    description
+    viewAllButton {
+      __typename
+      text
+      url
+    }
+  }
+  about {
+    __typename
+    imageUrl
+    imageAlt
+    learnMoreButton {
+      __typename
+      text
+      url
+    }
+  }
+  testimonials {
+    __typename
+    title
+    description
+    items {
+      __typename
+      quote
+      author
+      rating
+    }
+  }
   body
 }
 

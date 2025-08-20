@@ -165,18 +165,128 @@ type BooksConnection implements Connection {
   edges: [BooksConnectionEdges]
 }
 
+type PagesHeroPrimaryButton {
+  text: String!
+  url: String!
+}
+
+type PagesHeroSecondaryButton {
+  text: String!
+  url: String!
+}
+
+type PagesHero {
+  logoUrl: String
+  logoAlt: String
+  primaryButton: PagesHeroPrimaryButton
+  secondaryButton: PagesHeroSecondaryButton
+}
+
+type PagesFeaturedBooksViewAllButton {
+  text: String!
+  url: String!
+}
+
+type PagesFeaturedBooks {
+  title: String!
+  description: String!
+  viewAllButton: PagesFeaturedBooksViewAllButton
+}
+
+type PagesAboutLearnMoreButton {
+  text: String!
+  url: String!
+}
+
+type PagesAbout {
+  imageUrl: String
+  imageAlt: String
+  learnMoreButton: PagesAboutLearnMoreButton
+}
+
+type PagesTestimonialsItems {
+  quote: String!
+  author: String!
+  rating: Float!
+}
+
+type PagesTestimonials {
+  title: String!
+  description: String!
+  items: [PagesTestimonialsItems]
+}
+
 type Pages implements Node & Document {
   title: String!
   description: String!
+  hero: PagesHero
+  featuredBooks: PagesFeaturedBooks
+  about: PagesAbout
+  testimonials: PagesTestimonials
   body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
+input PagesHeroPrimaryButtonFilter {
+  text: StringFilter
+  url: StringFilter
+}
+
+input PagesHeroSecondaryButtonFilter {
+  text: StringFilter
+  url: StringFilter
+}
+
+input PagesHeroFilter {
+  logoUrl: StringFilter
+  logoAlt: StringFilter
+  primaryButton: PagesHeroPrimaryButtonFilter
+  secondaryButton: PagesHeroSecondaryButtonFilter
+}
+
+input PagesFeaturedBooksViewAllButtonFilter {
+  text: StringFilter
+  url: StringFilter
+}
+
+input PagesFeaturedBooksFilter {
+  title: StringFilter
+  description: StringFilter
+  viewAllButton: PagesFeaturedBooksViewAllButtonFilter
+}
+
+input PagesAboutLearnMoreButtonFilter {
+  text: StringFilter
+  url: StringFilter
+}
+
+input PagesAboutFilter {
+  imageUrl: StringFilter
+  imageAlt: StringFilter
+  learnMoreButton: PagesAboutLearnMoreButtonFilter
+}
+
+input PagesTestimonialsItemsFilter {
+  quote: StringFilter
+  author: StringFilter
+  rating: NumberFilter
+}
+
+input PagesTestimonialsFilter {
+  title: StringFilter
+  description: StringFilter
+  items: PagesTestimonialsItemsFilter
+}
+
 input PagesFilter {
   title: StringFilter
   description: StringFilter
+  hero: PagesHeroFilter
+  featuredBooks: PagesFeaturedBooksFilter
+  about: PagesAboutFilter
+  testimonials: PagesTestimonialsFilter
   body: RichTextFilter
 }
 
@@ -292,9 +402,64 @@ input BooksMutation {
   body: JSON
 }
 
+input PagesHeroPrimaryButtonMutation {
+  text: String
+  url: String
+}
+
+input PagesHeroSecondaryButtonMutation {
+  text: String
+  url: String
+}
+
+input PagesHeroMutation {
+  logoUrl: String
+  logoAlt: String
+  primaryButton: PagesHeroPrimaryButtonMutation
+  secondaryButton: PagesHeroSecondaryButtonMutation
+}
+
+input PagesFeaturedBooksViewAllButtonMutation {
+  text: String
+  url: String
+}
+
+input PagesFeaturedBooksMutation {
+  title: String
+  description: String
+  viewAllButton: PagesFeaturedBooksViewAllButtonMutation
+}
+
+input PagesAboutLearnMoreButtonMutation {
+  text: String
+  url: String
+}
+
+input PagesAboutMutation {
+  imageUrl: String
+  imageAlt: String
+  learnMoreButton: PagesAboutLearnMoreButtonMutation
+}
+
+input PagesTestimonialsItemsMutation {
+  quote: String
+  author: String
+  rating: Float
+}
+
+input PagesTestimonialsMutation {
+  title: String
+  description: String
+  items: [PagesTestimonialsItemsMutation]
+}
+
 input PagesMutation {
   title: String
   description: String
+  hero: PagesHeroMutation
+  featuredBooks: PagesFeaturedBooksMutation
+  about: PagesAboutMutation
+  testimonials: PagesTestimonialsMutation
   body: JSON
 }
 

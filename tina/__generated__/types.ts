@@ -276,19 +276,138 @@ export type BooksConnection = Connection & {
   edges?: Maybe<Array<Maybe<BooksConnectionEdges>>>;
 };
 
+export type PagesHeroPrimaryButton = {
+  __typename?: 'PagesHeroPrimaryButton';
+  text: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type PagesHeroSecondaryButton = {
+  __typename?: 'PagesHeroSecondaryButton';
+  text: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type PagesHero = {
+  __typename?: 'PagesHero';
+  logoUrl?: Maybe<Scalars['String']['output']>;
+  logoAlt?: Maybe<Scalars['String']['output']>;
+  primaryButton?: Maybe<PagesHeroPrimaryButton>;
+  secondaryButton?: Maybe<PagesHeroSecondaryButton>;
+};
+
+export type PagesFeaturedBooksViewAllButton = {
+  __typename?: 'PagesFeaturedBooksViewAllButton';
+  text: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type PagesFeaturedBooks = {
+  __typename?: 'PagesFeaturedBooks';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  viewAllButton?: Maybe<PagesFeaturedBooksViewAllButton>;
+};
+
+export type PagesAboutLearnMoreButton = {
+  __typename?: 'PagesAboutLearnMoreButton';
+  text: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type PagesAbout = {
+  __typename?: 'PagesAbout';
+  imageUrl?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  learnMoreButton?: Maybe<PagesAboutLearnMoreButton>;
+};
+
+export type PagesTestimonialsItems = {
+  __typename?: 'PagesTestimonialsItems';
+  quote: Scalars['String']['output'];
+  author: Scalars['String']['output'];
+  rating: Scalars['Float']['output'];
+};
+
+export type PagesTestimonials = {
+  __typename?: 'PagesTestimonials';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  items?: Maybe<Array<Maybe<PagesTestimonialsItems>>>;
+};
+
 export type Pages = Node & Document & {
   __typename?: 'Pages';
   title: Scalars['String']['output'];
   description: Scalars['String']['output'];
+  hero?: Maybe<PagesHero>;
+  featuredBooks?: Maybe<PagesFeaturedBooks>;
+  about?: Maybe<PagesAbout>;
+  testimonials?: Maybe<PagesTestimonials>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
+export type PagesHeroPrimaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PagesHeroSecondaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PagesHeroFilter = {
+  logoUrl?: InputMaybe<StringFilter>;
+  logoAlt?: InputMaybe<StringFilter>;
+  primaryButton?: InputMaybe<PagesHeroPrimaryButtonFilter>;
+  secondaryButton?: InputMaybe<PagesHeroSecondaryButtonFilter>;
+};
+
+export type PagesFeaturedBooksViewAllButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PagesFeaturedBooksFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  viewAllButton?: InputMaybe<PagesFeaturedBooksViewAllButtonFilter>;
+};
+
+export type PagesAboutLearnMoreButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PagesAboutFilter = {
+  imageUrl?: InputMaybe<StringFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  learnMoreButton?: InputMaybe<PagesAboutLearnMoreButtonFilter>;
+};
+
+export type PagesTestimonialsItemsFilter = {
+  quote?: InputMaybe<StringFilter>;
+  author?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<NumberFilter>;
+};
+
+export type PagesTestimonialsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  items?: InputMaybe<PagesTestimonialsItemsFilter>;
+};
+
 export type PagesFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<PagesHeroFilter>;
+  featuredBooks?: InputMaybe<PagesFeaturedBooksFilter>;
+  about?: InputMaybe<PagesAboutFilter>;
+  testimonials?: InputMaybe<PagesTestimonialsFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -481,9 +600,64 @@ export type BooksMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type PagesHeroPrimaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesHeroSecondaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesHeroMutation = {
+  logoUrl?: InputMaybe<Scalars['String']['input']>;
+  logoAlt?: InputMaybe<Scalars['String']['input']>;
+  primaryButton?: InputMaybe<PagesHeroPrimaryButtonMutation>;
+  secondaryButton?: InputMaybe<PagesHeroSecondaryButtonMutation>;
+};
+
+export type PagesFeaturedBooksViewAllButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesFeaturedBooksMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  viewAllButton?: InputMaybe<PagesFeaturedBooksViewAllButtonMutation>;
+};
+
+export type PagesAboutLearnMoreButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesAboutMutation = {
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  learnMoreButton?: InputMaybe<PagesAboutLearnMoreButtonMutation>;
+};
+
+export type PagesTestimonialsItemsMutation = {
+  quote?: InputMaybe<Scalars['String']['input']>;
+  author?: InputMaybe<Scalars['String']['input']>;
+  rating?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type PagesTestimonialsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<PagesTestimonialsItemsMutation>>>;
+};
+
 export type PagesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<PagesHeroMutation>;
+  featuredBooks?: InputMaybe<PagesFeaturedBooksMutation>;
+  about?: InputMaybe<PagesAboutMutation>;
+  testimonials?: InputMaybe<PagesTestimonialsMutation>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -512,7 +686,7 @@ export type FooterMutation = {
 
 export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn?: string | null, body?: any | null };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', title: string, companyName: string, description: string, copyrightYear: number, copyrightText: string, socialMedia?: { __typename: 'FooterSocialMedia', twitter?: string | null, facebook?: string | null, linkedin?: string | null } | null, facebookGroup?: { __typename: 'FooterFacebookGroup', title: string, description: string, url: string, buttonText: string } | null };
 
@@ -540,7 +714,7 @@ export type PagesQueryVariables = Exact<{
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -552,7 +726,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null } | null } | null> | null } };
 
 export type FooterQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -594,6 +768,52 @@ export const PagesPartsFragmentDoc = gql`
   __typename
   title
   description
+  hero {
+    __typename
+    logoUrl
+    logoAlt
+    primaryButton {
+      __typename
+      text
+      url
+    }
+    secondaryButton {
+      __typename
+      text
+      url
+    }
+  }
+  featuredBooks {
+    __typename
+    title
+    description
+    viewAllButton {
+      __typename
+      text
+      url
+    }
+  }
+  about {
+    __typename
+    imageUrl
+    imageAlt
+    learnMoreButton {
+      __typename
+      text
+      url
+    }
+  }
+  testimonials {
+    __typename
+    title
+    description
+    items {
+      __typename
+      quote
+      author
+      rating
+    }
+  }
   body
 }
     `;
