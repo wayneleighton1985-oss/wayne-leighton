@@ -12,7 +12,7 @@ format: Hard copy
 price: 55
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
-publishedYear: 202
+publishedYear: 2025
 pages: 648
 isbn: ''
 ---
@@ -23,4 +23,4 @@ This package includes both the printed book and a ticket to Wayne's exclusive se
 
 Pre order from this link now [https://square.link/u/tsoJ7yAO](https://square.link/u/tsoJ7yAO)
 
-Release date 5 February 2027 
+Release date 5 February 2027
