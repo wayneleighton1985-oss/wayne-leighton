@@ -17,10 +17,10 @@ description: >
   Includes a ticket to Wayne's exclusive seminar where he explains the
   strategies and techniques used in his legal battles.
 format: Transcripts Edition
-price: 183
+price: 184
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
-publishedYear: 2025
+publishedYear: 2027
 pages: 1138
 ---
 
@@ -48,4 +48,4 @@ This package includes both the Transcripts Edition book and a ticket to Wayne's 
 
 Pre order this book now from this link [https://square.link/u/0gdRyugt](https://square.link/u/0gdRyugt)
 
-Release date 5 February 2027 
+Release date 5 February 2027
