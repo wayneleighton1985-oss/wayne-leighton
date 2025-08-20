@@ -46,6 +46,6 @@ The book is about 'what' I did. This seminar explains 'how' I did it. Further, t
 
 This package includes both the Transcripts Edition book and a ticket to Wayne's exclusive seminar where he shares the strategies and techniques he used in his legal battles against various authorities.
 
-Pre order this boo now from this link [https://square.link/u/0gdRyugt](https://square.link/u/0gdRyugt)
+Pre order this book now from this link [https://square.link/u/0gdRyugt](https://square.link/u/0gdRyugt)
 
 Release date 5 February 2027 
