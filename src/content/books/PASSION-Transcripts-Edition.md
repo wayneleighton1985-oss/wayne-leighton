@@ -18,7 +18,7 @@ price: 157
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2027
-pages: 1038
+pages: 1138
 ---
 
 What is the difference between the information in the standard book, and the seminar?
