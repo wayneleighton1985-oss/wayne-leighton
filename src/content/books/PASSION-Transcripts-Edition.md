@@ -2,7 +2,7 @@
 title: PASSION Transcripts Edition
 author: Wayne Leighton
 description: >
-  Why does the Transcripts Version cost £150??
+  Why does the Transcripts Version cost £150?
 
   It has cost me thousands to get all the audio transcribed. Secondly, the book
   is very thick. The printing costs are expensive. Thirdly, this edition is
@@ -14,11 +14,11 @@ description: >
   to judgment. It also includes all the corrupted investigations and complaint
   coverup decisions.
 format: Transcripts Edition
-price: 159
+price: 157
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
-publishedYear: 2025
-pages: 497
+publishedYear: 2026
+pages: 1038
 ---
 
 What is the difference between the information in the standard book, and the seminar?
@@ -29,7 +29,7 @@ The book is about ‘what’ I did. This seminar explains ‘how’ I did it. Fu
 
 \*  The Information Commissioner (twice)
 
-\*  First Tier Tribunal 
+\*  First Tier Tribunal
 
 \*  Independent Police Complaints Commission
 
