@@ -47,7 +47,7 @@ testimonials:
       rating: 5
 ---
 
-# Transforms Your Passion -  Fighting Back
+# Transform Your Passion -  Fighting Back
 
 Discover Wayne Leighton's collection of transformative books on lawfare, court trials and successes against the state. These books provide powerful insights and strategies for those facing legal challenges and institutional abuse.
 
