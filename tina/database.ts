@@ -17,8 +17,8 @@ if (isLocal) {
 // GitHub provider for production mode
 const githubProvider = new GitHubProvider({
   branch: process.env.GITHUB_BRANCH || 'main',
-  owner: process.env.GITHUB_OWNER || 'nickroberts',
-  repo: process.env.GITHUB_REPO || 'Wayne-Leighton-Books', // Repository name remains the same
+  owner: process.env.GITHUB_OWNER || 'wayneleighton1985-oss',
+  repo: process.env.GITHUB_REPO || 'wayne-leighton', // Correct repository name
   token: (process.env.GITHUB_PERSONAL_ACCESS_TOKEN || process.env.TINA_TOKEN || '') as string,
 });
 
