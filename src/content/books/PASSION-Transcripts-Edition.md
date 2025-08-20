@@ -17,7 +17,7 @@ format: Transcripts Edition
 price: 157
 coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
-publishedYear: 2026
+publishedYear: 2027
 pages: 1038
 ---
 
