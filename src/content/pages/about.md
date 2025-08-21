@@ -1,12 +1,17 @@
 ---
 title: About Wayne Leighton - Author & Legal Activist
-description: Learn about Wayne Leighton's journey through the legal system, exposing corruption and sharing his extraordinary life experiences.
+description: >-
+  Learn about Wayne Leighton's journey through the legal system, exposing
+  corruption and sharing his extraordinary life experiences.
+testimonials:
+  title: Reader Testimonials
+  description: Coming Soon
 quickFacts:
   title: Quick Facts
-  countriesVisited: "90+"
-  yearsAsNomad: "10+"
-  booksPublished: "3"
-  legalCasesWon: "12+"
+  countriesVisited: 90+
+  yearsAsNomad: 10+
+  booksPublished: '3'
+  legalCasesWon: 12+
 ---
 
 ## A Journey of Truth and Revelation
