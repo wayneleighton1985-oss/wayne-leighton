@@ -28,23 +28,7 @@ about:
     url: /about
 testimonials:
   title: Reader Testimonials
-  description: Hear from those who have used Wayne's books to fight back and win.
-  items:
-    - quote: >-
-        Wayne's book gave me the confidence and knowledge to stand up to a
-        corrupt judge. I won my case and exposed their misconduct.
-      author: 'Michael T., London'
-      rating: 5
-    - quote: >-
-        The strategies in this book saved me thousands in legal fees and helped
-        me navigate a complex legal situation with confidence.
-      author: 'Sarah K., Manchester'
-      rating: 5
-    - quote: >-
-        Eye-opening and practical. This book revealed how the system really
-        works and gave me tools to protect myself and my family.
-      author: 'James B., Edinburgh'
-      rating: 5
+  description: Coming Soon
 ---
 
 # Transform Your Passion -  Fighting Back
