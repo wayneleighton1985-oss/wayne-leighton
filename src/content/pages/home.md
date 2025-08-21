@@ -28,7 +28,7 @@ about:
     url: /about
 testimonials:
   title: Reader Testimonials
-  description: Coming Soon
+  description: Coming Soon...
 ---
 
 # Transform Your Passion -  Fighting Back
