@@ -4,6 +4,9 @@ description: >-
   Browse our complete collection of transformative books on lawfare, court
   trials and successes against the state. Available in digital and print
   formats.
+testimonials:
+  title: TBA
+  description: TBA
 quickFacts:
   title: Quick facts
   countriesVisited: '91'
