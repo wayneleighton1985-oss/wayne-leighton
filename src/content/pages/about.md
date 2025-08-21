@@ -8,10 +8,10 @@ testimonials:
   description: Coming Soon
 quickFacts:
   title: Quick Facts
-  countriesVisited: 90+
-  yearsAsNomad: 10+
-  booksPublished: '3'
-  legalCasesWon: 12+
+  countriesVisited: '91'
+  yearsAsNomad: '10'
+  booksPublished: '2'
+  legalCasesWon: '18'
 ---
 
 ## A Journey of Truth and Revelation
