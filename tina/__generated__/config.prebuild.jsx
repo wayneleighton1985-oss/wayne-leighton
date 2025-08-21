@@ -14,11 +14,7 @@ var config_default = defineConfig({
     // Empty basePath for correct asset loading
   },
   // Configure the API URL for TinaCMS
-  // The API URL must be set in the correct location based on TinaCMS type definitions
-  backend: {
-    // Using the apiURL property within the backend configuration object
-    apiUrl: process.env.TINA_PUBLIC_IS_LOCAL === "true" ? "http://localhost:4001/graphql" : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${branch}`
-  },
+  contentApiUrlOverride: process.env.TINA_PUBLIC_IS_LOCAL === "true" ? "http://localhost:4001/graphql" : void 0,
   media: {
     tina: {
       mediaRoot: "images/books",
@@ -306,6 +302,43 @@ var config_default = defineConfig({
                     required: true
                   }
                 ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "quickFacts",
+            label: "Quick Facts Section",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Section Title",
+                required: true
+              },
+              {
+                type: "string",
+                name: "countriesVisited",
+                label: "Countries Visited",
+                required: true
+              },
+              {
+                type: "string",
+                name: "yearsAsNomad",
+                label: "Years as Nomad",
+                required: true
+              },
+              {
+                type: "string",
+                name: "booksPublished",
+                label: "Books Published",
+                required: true
+              },
+              {
+                type: "string",
+                name: "legalCasesWon",
+                label: "Legal Cases Won",
+                required: true
               }
             ]
           },

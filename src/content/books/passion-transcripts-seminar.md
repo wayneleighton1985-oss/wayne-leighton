@@ -22,6 +22,7 @@ coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2027
 pages: 1138
+squarePaymentUrl: 'https://square.link/u/Ej6Ej6Ej'
 ---
 
 What is the difference between the information in the standard book, and the seminar?
@@ -46,6 +47,6 @@ The book is about 'what' I did. This seminar explains 'how' I did it. Further, t
 
 This package includes both the Transcripts Edition book and a ticket to Wayne's exclusive seminar where he shares the strategies and techniques he used in his legal battles against various authorities.
 
-Pre order this book now from this link [https://square.link/u/0gdRyugt](https://square.link/u/0gdRyugt)
+
 
 Release date 5 February 2027

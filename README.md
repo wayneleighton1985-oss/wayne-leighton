@@ -1,6 +1,6 @@
 # Wayne Leighton Books
 
-A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind CSS, and Snipcart for selling Wayne Leighton's collection of business and leadership books. Content management is handled by TinaCMS.
+A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind CSS, and Square for selling Wayne Leighton's collection of business and leadership books. Content management is handled by TinaCMS.
 
 <!-- Deployment trigger: 2024-12-16 -->
 
@@ -8,7 +8,7 @@ A modern, responsive e-commerce website built with Astro, TypeScript, Tailwind C
 
 - **Modern Tech Stack**: Built with Astro 4.0, TypeScript, and Tailwind CSS
 - **Content Management**: TinaCMS for easy content editing
-- **E-commerce Ready**: Integrated with Snipcart for secure payments and cart management
+- **E-commerce Ready**: Integrated with Square for secure direct payments
 - **Responsive Design**: Mobile-first design that works on all devices
 - **Dark Mode**: Toggle between light and dark themes with preference persistence
 - **SEO Optimized**: Meta tags, Open Graph, structured data, and optimized images
@@ -36,10 +36,10 @@ Each book is available in two formats:
    npm install
    ```
 
-3. **Configure Snipcart**
-   - Sign up for a [Snipcart account](https://snipcart.com/)
-   - Replace `YOUR_SNIPCART_PUBLIC_API_KEY_HERE` in `src/layouts/MainLayout.astro` with your actual Snipcart public API key
-   - For testing, you can use Snipcart's test mode
+3. **Configure Square**
+   - Sign up for a [Square account](https://squareup.com/)
+   - Create payment links for each book in your Square dashboard
+   - Update the `squarePaymentUrl` field in each book's markdown file with the corresponding Square payment link
 
 4. **Configure TinaCMS**
    - For local development, run the setup script:
@@ -193,13 +193,13 @@ The website uses Tailwind CSS with a custom color palette. Main brand colors:
 - Gray scale for text and backgrounds
 - Dark mode support with `dark:` prefixes
 
-### Snipcart Configuration
+### Square Configuration
 
-The Snipcart integration is configured in `MainLayout.astro`. Key features:
-- Cart icon with item count
-- Secure checkout process
-- Support for product variants (Digital vs Paperback)
-- Custom fields for format selection
+The Square integration uses direct payment links. Key features:
+- Direct checkout without cart functionality
+- Secure payment processing through Square
+- Individual payment links for each book format
+- Simplified purchase flow
 
 ## 🚀 Deployment
 
@@ -224,19 +224,19 @@ The site can be deployed to any static hosting service:
 ### Environment Variables
 
 For production deployment, make sure to:
-1. Replace the Snipcart test API key with your live API key
+1. Update all Square payment URLs in book markdown files with live payment links
 2. Update the `site` URL in `astro.config.mjs`
-3. Configure your domain in Snipcart dashboard
+3. Test all payment links in your Square dashboard
 
 ## 🔧 Configuration
 
-### Snipcart Setup
+### Square Setup
 
-1. **Create Account**: Sign up at [snipcart.com](https://snipcart.com/)
-2. **Get API Keys**: Find your public API key in the Snipcart dashboard
-3. **Update Code**: Replace `YOUR_SNIPCART_PUBLIC_API_KEY_HERE` in `MainLayout.astro`
-4. **Configure Domain**: Add your domain to the Snipcart dashboard
-5. **Test Mode**: Use test API key for development
+1. **Create Account**: Sign up at [squareup.com](https://squareup.com/)
+2. **Create Payment Links**: Generate payment links for each book in your Square dashboard
+3. **Update Content**: Add `squarePaymentUrl` field to each book's markdown file
+4. **Configure Products**: Set up products in Square with appropriate pricing
+5. **Test Mode**: Use Square's sandbox environment for development testing
 
 ### SEO Configuration
 

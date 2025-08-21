@@ -151,20 +151,23 @@ const structuredData = {
             </div>
 
             <!-- Purchase Button -->
-            <button 
-              class="snipcart-add-item w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
-              data-item-id={book.slug}
-              data-item-price={book.data.price}
-              data-item-url={`https://findyourpassion.co.uk/books/${book.slug}`}
-              data-item-image={book.data.coverImageUrl.startsWith('http') ? book.data.coverImageUrl : `https://findyourpassion.co.uk${book.data.coverImageUrl}`}
-              data-item-name={`${book.data.title} (${book.data.format})`}
-              data-item-description={book.data.description}
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0h15M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"></path>
-              </svg>
-              <span>Add to Cart - £{book.data.price}</span>
-            </button>
+            {book.data.squarePaymentUrl ? (
+              <a 
+                href={book.data.squarePaymentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center space-x-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+                <span>Buy Now - £{book.data.price}</span>
+              </a>
+            ) : (
+              <div class="w-full bg-gray-400 text-white px-6 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2">
+                <span>Coming Soon - £{book.data.price}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

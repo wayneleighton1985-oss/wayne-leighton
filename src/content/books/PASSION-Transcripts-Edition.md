@@ -19,6 +19,7 @@ coverImageUrl: /images/books/find-your-passion.jpeg
 category: Lawfare
 publishedYear: 2027
 pages: 1138
+squarePaymentUrl: 'https://square.link/u/J0D66LFF'
 ---
 
 What is the difference between the information in the standard book, and the seminar?
@@ -41,7 +42,7 @@ The book is about ‘what’ I did. This seminar explains ‘how’ I did it. Fu
 
 \*  DVLA
 
-Pre-order this book now from this link [https://square.link/u/J0D66LFF](https://square.link/u/J0D66LFF)
+
 
 Release date 5 February 2027
 

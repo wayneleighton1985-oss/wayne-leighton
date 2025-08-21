@@ -216,6 +216,14 @@ type PagesTestimonials {
   items: [PagesTestimonialsItems]
 }
 
+type PagesQuickFacts {
+  title: String!
+  countriesVisited: String!
+  yearsAsNomad: String!
+  booksPublished: String!
+  legalCasesWon: String!
+}
+
 type Pages implements Node & Document {
   title: String!
   description: String!
@@ -223,6 +231,7 @@ type Pages implements Node & Document {
   featuredBooks: PagesFeaturedBooks
   about: PagesAbout
   testimonials: PagesTestimonials
+  quickFacts: PagesQuickFacts
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -280,6 +289,14 @@ input PagesTestimonialsFilter {
   items: PagesTestimonialsItemsFilter
 }
 
+input PagesQuickFactsFilter {
+  title: StringFilter
+  countriesVisited: StringFilter
+  yearsAsNomad: StringFilter
+  booksPublished: StringFilter
+  legalCasesWon: StringFilter
+}
+
 input PagesFilter {
   title: StringFilter
   description: StringFilter
@@ -287,6 +304,7 @@ input PagesFilter {
   featuredBooks: PagesFeaturedBooksFilter
   about: PagesAboutFilter
   testimonials: PagesTestimonialsFilter
+  quickFacts: PagesQuickFactsFilter
   body: RichTextFilter
 }
 
@@ -453,6 +471,14 @@ input PagesTestimonialsMutation {
   items: [PagesTestimonialsItemsMutation]
 }
 
+input PagesQuickFactsMutation {
+  title: String
+  countriesVisited: String
+  yearsAsNomad: String
+  booksPublished: String
+  legalCasesWon: String
+}
+
 input PagesMutation {
   title: String
   description: String
@@ -460,6 +486,7 @@ input PagesMutation {
   featuredBooks: PagesFeaturedBooksMutation
   about: PagesAboutMutation
   testimonials: PagesTestimonialsMutation
+  quickFacts: PagesQuickFactsMutation
   body: JSON
 }
 

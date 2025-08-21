@@ -336,6 +336,15 @@ export type PagesTestimonials = {
   items?: Maybe<Array<Maybe<PagesTestimonialsItems>>>;
 };
 
+export type PagesQuickFacts = {
+  __typename?: 'PagesQuickFacts';
+  title: Scalars['String']['output'];
+  countriesVisited: Scalars['String']['output'];
+  yearsAsNomad: Scalars['String']['output'];
+  booksPublished: Scalars['String']['output'];
+  legalCasesWon: Scalars['String']['output'];
+};
+
 export type Pages = Node & Document & {
   __typename?: 'Pages';
   title: Scalars['String']['output'];
@@ -344,6 +353,7 @@ export type Pages = Node & Document & {
   featuredBooks?: Maybe<PagesFeaturedBooks>;
   about?: Maybe<PagesAbout>;
   testimonials?: Maybe<PagesTestimonials>;
+  quickFacts?: Maybe<PagesQuickFacts>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -401,6 +411,14 @@ export type PagesTestimonialsFilter = {
   items?: InputMaybe<PagesTestimonialsItemsFilter>;
 };
 
+export type PagesQuickFactsFilter = {
+  title?: InputMaybe<StringFilter>;
+  countriesVisited?: InputMaybe<StringFilter>;
+  yearsAsNomad?: InputMaybe<StringFilter>;
+  booksPublished?: InputMaybe<StringFilter>;
+  legalCasesWon?: InputMaybe<StringFilter>;
+};
+
 export type PagesFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
@@ -408,6 +426,7 @@ export type PagesFilter = {
   featuredBooks?: InputMaybe<PagesFeaturedBooksFilter>;
   about?: InputMaybe<PagesAboutFilter>;
   testimonials?: InputMaybe<PagesTestimonialsFilter>;
+  quickFacts?: InputMaybe<PagesQuickFactsFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -651,6 +670,14 @@ export type PagesTestimonialsMutation = {
   items?: InputMaybe<Array<InputMaybe<PagesTestimonialsItemsMutation>>>;
 };
 
+export type PagesQuickFactsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  countriesVisited?: InputMaybe<Scalars['String']['input']>;
+  yearsAsNomad?: InputMaybe<Scalars['String']['input']>;
+  booksPublished?: InputMaybe<Scalars['String']['input']>;
+  legalCasesWon?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PagesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -658,6 +685,7 @@ export type PagesMutation = {
   featuredBooks?: InputMaybe<PagesFeaturedBooksMutation>;
   about?: InputMaybe<PagesAboutMutation>;
   testimonials?: InputMaybe<PagesTestimonialsMutation>;
+  quickFacts?: InputMaybe<PagesQuickFactsMutation>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -686,7 +714,7 @@ export type FooterMutation = {
 
 export type BooksPartsFragment = { __typename: 'Books', title: string, author: string, description: any, format: string, price: number, coverImageUrl: string, category: string, publishedYear: number, pages: number, isbn?: string | null, body?: any | null };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, description: string, body?: any | null, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null, quickFacts?: { __typename: 'PagesQuickFacts', title: string, countriesVisited: string, yearsAsNomad: string, booksPublished: string, legalCasesWon: string } | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', title: string, companyName: string, description: string, copyrightYear: number, copyrightText: string, socialMedia?: { __typename: 'FooterSocialMedia', twitter?: string | null, facebook?: string | null, linkedin?: string | null } | null, facebookGroup?: { __typename: 'FooterFacebookGroup', title: string, description: string, url: string, buttonText: string } | null };
 
@@ -714,7 +742,7 @@ export type PagesQueryVariables = Exact<{
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null, quickFacts?: { __typename: 'PagesQuickFacts', title: string, countriesVisited: string, yearsAsNomad: string, booksPublished: string, legalCasesWon: string } | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -726,7 +754,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, description: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'PagesHero', logoUrl?: string | null, logoAlt?: string | null, primaryButton?: { __typename: 'PagesHeroPrimaryButton', text: string, url: string } | null, secondaryButton?: { __typename: 'PagesHeroSecondaryButton', text: string, url: string } | null } | null, featuredBooks?: { __typename: 'PagesFeaturedBooks', title: string, description: string, viewAllButton?: { __typename: 'PagesFeaturedBooksViewAllButton', text: string, url: string } | null } | null, about?: { __typename: 'PagesAbout', imageUrl?: string | null, imageAlt?: string | null, learnMoreButton?: { __typename: 'PagesAboutLearnMoreButton', text: string, url: string } | null } | null, testimonials?: { __typename: 'PagesTestimonials', title: string, description: string, items?: Array<{ __typename: 'PagesTestimonialsItems', quote: string, author: string, rating: number } | null> | null } | null, quickFacts?: { __typename: 'PagesQuickFacts', title: string, countriesVisited: string, yearsAsNomad: string, booksPublished: string, legalCasesWon: string } | null } | null } | null> | null } };
 
 export type FooterQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -813,6 +841,14 @@ export const PagesPartsFragmentDoc = gql`
       author
       rating
     }
+  }
+  quickFacts {
+    __typename
+    title
+    countriesVisited
+    yearsAsNomad
+    booksPublished
+    legalCasesWon
   }
   body
 }

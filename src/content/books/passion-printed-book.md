@@ -12,10 +12,11 @@ category: Lawfare
 publishedYear: 2027
 pages: 648
 isbn: ''
+squarePaymentUrl: 'https://square.link/u/ek37LqaL'
 ---
 
 A True Life Story About A Broken Child Living In A Residential Children's Home Who Travels The World, Embarking On An Epic Journey That's Ambushed By Persecution, Resulting In A Voracious Fight Of Trials And Tribulations
 
-Pre order the book from this link now [https://square.link/u/ek37LqaL](https://square.link/u/ek37LqaL)
+
 
 Release date 5 February 2027

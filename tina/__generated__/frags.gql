@@ -63,6 +63,14 @@ fragment PagesParts on Pages {
       rating
     }
   }
+  quickFacts {
+    __typename
+    title
+    countriesVisited
+    yearsAsNomad
+    booksPublished
+    legalCasesWon
+  }
   body
 }
 
